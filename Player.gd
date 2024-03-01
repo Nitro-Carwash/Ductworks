@@ -30,13 +30,19 @@ func _physics_process(delta):
 	
 func _input(event):
 	if event is InputEventMouseMotion:
-		var rotation_y = self.rotation.y - event.relative.x * (mouse_sensitivity/1000)
-		var rotation_x = clamp(self.rotation.x - event.relative.y * (mouse_sensitivity/1000), -vertical_angle_limit, vertical_angle_limit)
-		self.rotation.y = rotation_y
-		self.rotation.x = rotation_x
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			var rotation_y = self.rotation.y - event.relative.x * (mouse_sensitivity/1000)
+			var rotation_x = clamp(self.rotation.x - event.relative.y * (mouse_sensitivity/1000), -vertical_angle_limit, vertical_angle_limit)
+			self.rotation.y = rotation_y
+			self.rotation.x = rotation_x
 	if event.is_action_pressed("toggle_tablet"):
 		if !is_toggle_blocked:
 			is_tablet_toggled = !is_tablet_toggled
+			if is_tablet_toggled:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+			else:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
 			is_toggle_blocked = true
 
 func toggle_animation_complete_callback():
