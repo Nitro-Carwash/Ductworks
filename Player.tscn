@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwd3g738jkfas"]
+[gd_scene load_steps=22 format=3 uid="uid://cwd3g738jkfas"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_of1yi"]
 [ext_resource type="PackedScene" uid="uid://cx80lvtbvvrm" path="res://tablet.tscn" id="2_701li"]
@@ -6,74 +6,118 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ybbt"]
 
-[sub_resource type="Animation" id="Animation_722rp"]
-resource_name = "idle_active"
-
-[sub_resource type="Animation" id="Animation_q8ks1"]
+[sub_resource type="Animation" id="Animation_xur8t"]
 resource_name = "idle_default"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.5, -0.8, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.707107, 0, 0.707107)
 
-[sub_resource type="Animation" id="Animation_3j0fg"]
+[sub_resource type="Animation" id="Animation_ottcx"]
+resource_name = "idle_active"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.4, -1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0984513, 0, 0, 0.995142)
+
+[sub_resource type="Animation" id="Animation_ij22w"]
 resource_name = "toggle"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.5, -0.8, 0, 1, 1, 0, -0.4, -1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.707107, 0, 0.707107, 1, 1, -0.098, 0, 0, 0.995)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w2ngf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bpexx"]
 _data = {
-"idle_active": SubResource("Animation_722rp"),
-"idle_default": SubResource("Animation_q8ks1"),
-"toggle": SubResource("Animation_3j0fg")
+"idle_active": SubResource("Animation_ottcx"),
+"idle_default": SubResource("Animation_xur8t"),
+"toggle": SubResource("Animation_ij22w")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n3p1s"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r20la"]
 animation = &"idle_active"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wxldb"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_migm5"]
 animation = &"idle_default"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5jbq7"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xa6n0"]
+animation = &"toggle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h5y7o"]
 animation = &"toggle"
 play_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2m5us"]
-animation = &"toggle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3oq13"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k30y7"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yqckl"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bmbj3"]
 advance_mode = 2
-advance_condition = &"toggle_pressed"
+advance_expression = "is_tablet_toggled==true"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e8ckt"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p7op2"]
-advance_mode = 2
-advance_condition = &"toggle_pressed"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aq7sd"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lopbu"]
+switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ijlmq"]
-states/End/position = Vector2(894, 180)
-states/Start/position = Vector2(232, 186)
-states/idle_active/node = SubResource("AnimationNodeAnimation_n3p1s")
-states/idle_active/position = Vector2(700, 180)
-states/idle_default/node = SubResource("AnimationNodeAnimation_wxldb")
-states/idle_default/position = Vector2(373, 186)
-states/toggle/node = SubResource("AnimationNodeAnimation_2m5us")
-states/toggle/position = Vector2(549, 242)
-"states/toggle back/node" = SubResource("AnimationNodeAnimation_5jbq7")
-"states/toggle back/position" = Vector2(549, 132)
-transitions = ["Start", "idle_default", SubResource("AnimationNodeStateMachineTransition_3oq13"), "idle_default", "toggle", SubResource("AnimationNodeStateMachineTransition_yqckl"), "toggle", "idle_active", SubResource("AnimationNodeStateMachineTransition_e8ckt"), "idle_active", "toggle back", SubResource("AnimationNodeStateMachineTransition_p7op2"), "toggle back", "idle_default", SubResource("AnimationNodeStateMachineTransition_aq7sd")]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5uil"]
+advance_mode = 2
+advance_expression = "is_tablet_toggled==false"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_etiow"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_he5oa"]
+switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8xeg3"]
-states/Start/position = Vector2(30, 175)
-states/StateMachine/node = SubResource("AnimationNodeStateMachine_ijlmq")
-states/StateMachine/position = Vector2(192, 175)
-transitions = ["Start", "StateMachine", SubResource("AnimationNodeStateMachineTransition_etiow")]
-graph_offset = Vector2(-221, 15)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_duksc"]
+states/Start/position = Vector2(176, 98)
+states/idle_active/node = SubResource("AnimationNodeAnimation_r20la")
+states/idle_active/position = Vector2(626, 100)
+states/idle_default/node = SubResource("AnimationNodeAnimation_migm5")
+states/idle_default/position = Vector2(297, 100)
+"states/toggle active/node" = SubResource("AnimationNodeAnimation_xa6n0")
+"states/toggle active/position" = Vector2(473, 147)
+"states/toggle inactive/node" = SubResource("AnimationNodeAnimation_h5y7o")
+"states/toggle inactive/position" = Vector2(473, 47)
+transitions = ["Start", "idle_default", SubResource("AnimationNodeStateMachineTransition_k30y7"), "idle_default", "toggle active", SubResource("AnimationNodeStateMachineTransition_bmbj3"), "toggle active", "idle_active", SubResource("AnimationNodeStateMachineTransition_lopbu"), "idle_active", "toggle inactive", SubResource("AnimationNodeStateMachineTransition_o5uil"), "toggle inactive", "idle_default", SubResource("AnimationNodeStateMachineTransition_he5oa")]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_abry2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_80jbu"]
+states/StateMachine/node = SubResource("AnimationNodeStateMachine_duksc")
+states/StateMachine/position = Vector2(368, 106)
+transitions = ["Start", "StateMachine", SubResource("AnimationNodeStateMachineTransition_abry2")]
+graph_offset = Vector2(-137, 0)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_suycv"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_of1yi")
@@ -88,23 +132,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="PlayerCamera" type="Camera3D" parent="Head"]
 cull_mask = 1048573
 
-[node name="HandPivot" type="Marker3D" parent="Head/PlayerCamera"]
+[node name="Tablet" parent="Head/PlayerCamera" instance=ExtResource("2_701li")]
+transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 0.5, -0.8, 0)
 
-[node name="Tablet" parent="Head/PlayerCamera/HandPivot" instance=ExtResource("2_701li")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.459741, -0.176375, -0.735864)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/PlayerCamera/HandPivot"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/PlayerCamera/Tablet"]
 libraries = {
-"": SubResource("AnimationLibrary_w2ngf")
+"": SubResource("AnimationLibrary_bpexx")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="Head/PlayerCamera/HandPivot"]
+[node name="AnimationTree" type="AnimationTree" parent="Head/PlayerCamera/Tablet"]
 libraries = {
-"": SubResource("AnimationLibrary_w2ngf")
+"": SubResource("AnimationLibrary_bpexx")
 }
-tree_root = SubResource("AnimationNodeStateMachine_8xeg3")
+tree_root = SubResource("AnimationNodeStateMachine_80jbu")
+advance_expression_base_node = NodePath("../../../..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/StateMachine/conditions/toggle_pressed = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.593204, 0)
+mesh = SubResource("CapsuleMesh_suycv")
+skeleton = NodePath("../PlayerCamera")
 
 [node name="HeldItemViewport" type="SubViewportContainer" parent="."]
 anchors_preset = 15

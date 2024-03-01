@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var speed := 10
 @export var acceleration := 8
 @export var deceleration := 10
+@export var is_tablet_toggled = false
 
 func _physics_process(delta):
 	var movement_axis = Input.get_vector("move_forward", "move_backward", "move_left", "move_right")
@@ -31,3 +32,6 @@ func _input(event):
 		var rotation_x = clamp(self.rotation.x - event.relative.y * (mouse_sensitivity/1000), -vertical_angle_limit, vertical_angle_limit)
 		self.rotation.y = rotation_y
 		self.rotation.x = rotation_x
+	if event.is_action_pressed("toggle_tablet"):
+		is_tablet_toggled = !is_tablet_toggled
+		pass

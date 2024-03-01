@@ -6,5 +6,5 @@ extends SubViewportContainer
 func _ready():
 	$SubViewport.size = Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
 	
-func _process(delta):
+func _process(_delta):
 	viewport_camera.global_transform = player_camera.global_transform
