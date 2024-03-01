@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwd3g738jkfas"]
+[gd_scene load_steps=21 format=3 uid="uid://cwd3g738jkfas"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_of1yi"]
 [ext_resource type="PackedScene" uid="uid://cx80lvtbvvrm" path="res://tablet.tscn" id="2_701li"]
+[ext_resource type="Script" path="res://HeldItemViewport.gd" id="3_hy7wf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ybbt"]
 
@@ -84,22 +85,40 @@ shape = SubResource("CapsuleShape3D_7ybbt")
 [node name="Head" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="PlayerCamera" type="Camera3D" parent="Head"]
+cull_mask = 1048573
 
-[node name="HandPivot" type="Marker3D" parent="Head"]
+[node name="HandPivot" type="Marker3D" parent="Head/PlayerCamera"]
 
-[node name="Tablet" parent="Head/HandPivot" instance=ExtResource("2_701li")]
+[node name="Tablet" parent="Head/PlayerCamera/HandPivot" instance=ExtResource("2_701li")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.459741, -0.176375, -0.735864)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/HandPivot"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/PlayerCamera/HandPivot"]
 libraries = {
 "": SubResource("AnimationLibrary_w2ngf")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="Head/HandPivot"]
+[node name="AnimationTree" type="AnimationTree" parent="Head/PlayerCamera/HandPivot"]
 libraries = {
 "": SubResource("AnimationLibrary_w2ngf")
 }
 tree_root = SubResource("AnimationNodeStateMachine_8xeg3")
 anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/conditions/toggle_pressed = false
+
+[node name="HeldItemViewport" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_hy7wf")
+
+[node name="SubViewport" type="SubViewport" parent="HeldItemViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 800)
+render_target_update_mode = 4
+
+[node name="HeldItemCamera" type="Camera3D" parent="HeldItemViewport/SubViewport"]
+cull_mask = 1047554

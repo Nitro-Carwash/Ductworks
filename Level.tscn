@@ -25,6 +25,7 @@ environment = SubResource("Environment_u1vsv")
 camera_attributes = SubResource("CameraAttributesPractical_l8eur")
 
 [node name="Player" parent="." instance=ExtResource("3_mdhvd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_58271")

@@ -25,17 +25,20 @@ script = ExtResource("1_ptblp")
 
 [node name="TabletScreenMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.12)
+layers = 2
 mesh = SubResource("QuadMesh_mdcjy")
 
 [node name="TabletModel" type="Node3D" parent="."]
 transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 0, 0, 0)
 
 [node name="Block" type="MeshInstance3D" parent="TabletModel"]
+layers = 2
 mesh = SubResource("BoxMesh_m22i4")
 surface_material_override/0 = SubResource("StandardMaterial3D_q0gqk")
 
 [node name="Handle" type="MeshInstance3D" parent="TabletModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.494329, 0.0140505, 0)
+layers = 2
 mesh = SubResource("CylinderMesh_gij3b")
 surface_material_override/0 = SubResource("StandardMaterial3D_ipwld")
 
