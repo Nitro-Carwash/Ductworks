@@ -12,7 +12,9 @@ func _ready():
 	await get_tree().process_frame
 	
 	# Create new material for the viewport
-	var viewport_material : StandardMaterial3D = StandardMaterial3D.new()
-	viewport_material.albedo_texture = $TabletViewport.get_texture()
-	viewport_material.albedo_texture_force_srgb = true
-	$TabletScreenMesh.set_surface_override_material(0, viewport_material)
+	#var viewport_material : StandardMaterial3D = StandardMaterial3D.new()
+	$TabletScreenMesh.get_surface_override_material(0).albedo_texture = $TabletViewport.get_texture()
+	$TabletScreenMesh.get_surface_override_material(0).albedo_texture_force_srgb = true
+	#viewport_material.albedo_texture = $TabletViewport.get_texture()
+	#viewport_material.albedo_texture_force_srgb = true
+	#$TabletScreenMesh.set_surface_override_material(0, viewport_material)

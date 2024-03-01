@@ -1,10 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx80lvtbvvrm"]
+[gd_scene load_steps=11 format=3 uid="uid://cx80lvtbvvrm"]
 
 [ext_resource type="Script" path="res://tablet.gd" id="1_ptblp"]
 [ext_resource type="PackedScene" uid="uid://cg45dtax8bfjw" path="res://tablet_screen.tscn" id="2_ou54n"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_mdcjy"]
 size = Vector2(0.685, 0.51)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_itgaa"]
+viewport_path = NodePath("TabletViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1hcmx"]
+viewport_path = NodePath("TabletViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5x6p"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_itgaa")
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_1hcmx")
+subsurf_scatter_strength = 0.17
 
 [sub_resource type="BoxMesh" id="BoxMesh_m22i4"]
 size = Vector3(1, 0.8, 0.3)
@@ -24,9 +38,10 @@ albedo_color = Color(0.129412, 0.14902, 0.180392, 1)
 script = ExtResource("1_ptblp")
 
 [node name="TabletScreenMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.130134)
 layers = 2
 mesh = SubResource("QuadMesh_mdcjy")
+surface_material_override/0 = SubResource("StandardMaterial3D_g5x6p")
 
 [node name="TabletModel" type="Node3D" parent="."]
 transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 0, 0, 0)
@@ -43,6 +58,7 @@ mesh = SubResource("CylinderMesh_gij3b")
 surface_material_override/0 = SubResource("StandardMaterial3D_ipwld")
 
 [node name="TabletViewport" type="SubViewport" parent="."]
+transparent_bg = true
 size = Vector2i(600, 400)
 
 [node name="Tablet" parent="TabletViewport" instance=ExtResource("2_ou54n")]

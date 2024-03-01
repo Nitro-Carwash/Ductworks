@@ -6,11 +6,11 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ybbt"]
 
-[sub_resource type="Animation" id="Animation_q8ks1"]
-resource_name = "idle_default"
-
 [sub_resource type="Animation" id="Animation_722rp"]
 resource_name = "idle_active"
+
+[sub_resource type="Animation" id="Animation_q8ks1"]
+resource_name = "idle_default"
 
 [sub_resource type="Animation" id="Animation_3j0fg"]
 resource_name = "toggle"
