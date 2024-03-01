@@ -9,3 +9,5 @@ script = ExtResource("1_of1yi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_7ybbt")
+
+[node name="Camera3D" type="Camera3D" parent="."]
