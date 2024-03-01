@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwd3g738jkfas"]
+[gd_scene load_steps=4 format=3 uid="uid://cwd3g738jkfas"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_of1yi"]
+[ext_resource type="PackedScene" uid="uid://cx80lvtbvvrm" path="res://tablet.tscn" id="2_701li"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ybbt"]
 
@@ -8,6 +9,16 @@
 script = ExtResource("1_of1yi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_7ybbt")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Head" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="HandPivot" type="Marker3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, -0.4, 0)
+
+[node name="Tablet" parent="Head/HandPivot" instance=ExtResource("2_701li")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201377, 0.167945, -0.748286)

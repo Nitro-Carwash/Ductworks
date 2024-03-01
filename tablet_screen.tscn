@@ -18,17 +18,17 @@ position = Vector2(302, 212)
 texture = ExtResource("1_t8e63")
 
 [node name="ne" type="Sprite2D" parent="."]
-position = Vector2(422, 213)
+position = Vector2(26, 373)
 texture = ExtResource("2_2xtf7")
 
 [node name="nw" type="Sprite2D" parent="."]
-position = Vector2(341, 133)
+position = Vector2(573, 373)
 texture = ExtResource("3_ql0c5")
 
 [node name="se" type="Sprite2D" parent="."]
-position = Vector2(207, 258)
+position = Vector2(28, 26)
 texture = ExtResource("4_pcsfl")
 
 [node name="sw" type="Sprite2D" parent="."]
-position = Vector2(317, 288)
+position = Vector2(576, 24)
 texture = ExtResource("5_xlvdv")
