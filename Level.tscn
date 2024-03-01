@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://6dlic6alho3q"]
+
+[ext_resource type="Script" path="res://Level.gd" id="1_6q0te"]
+[ext_resource type="PackedScene" uid="uid://uosc1v2t2ahs" path="res://tablet_viewport.tscn" id="1_gcsyd"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w07ju"]
+
+[sub_resource type="Environment" id="Environment_u1vsv"]
+ambient_light_color = Color(0.372549, 0.372549, 0.372549, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_l8eur"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b7mii"]
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_6q0te")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.781923, 0.623375, 0, -0.623375, 0.781923, 0, 0.992673, 1.52128)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_energy = 2.371
+
+[node name="TabletQuad" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_w07ju")
+
+[node name="TabletViewport" parent="." instance=ExtResource("1_gcsyd")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u1vsv")
+camera_attributes = SubResource("CameraAttributesPractical_l8eur")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25034)
+mesh = SubResource("BoxMesh_b7mii")

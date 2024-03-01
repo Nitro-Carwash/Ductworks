@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg45dtax8bfjw"]
+
+[ext_resource type="Texture2D" uid="uid://fpbcctoh7lij" path="res://pipe_long.png" id="1_t8e63"]
+[ext_resource type="Texture2D" uid="uid://bo0hhrvdxt7a5" path="res://Pipe_ne.png" id="2_2xtf7"]
+[ext_resource type="Texture2D" uid="uid://b3ectj8ibeu4u" path="res://pipe_nw.png" id="3_ql0c5"]
+[ext_resource type="Texture2D" uid="uid://dwl4jkkmic72x" path="res://pipe_se.png" id="4_pcsfl"]
+[ext_resource type="Texture2D" uid="uid://cjc2btevejky0" path="res://pipe_sw.png" id="5_xlvdv"]
+
+[node name="Tablet" type="Node2D"]
+
+[node name="Background" type="Panel" parent="."]
+offset_right = 600.0
+offset_bottom = 400.0
+metadata/_edit_use_anchors_ = true
+
+[node name="long" type="Sprite2D" parent="."]
+position = Vector2(302, 212)
+texture = ExtResource("1_t8e63")
+
+[node name="ne" type="Sprite2D" parent="."]
+position = Vector2(422, 213)
+texture = ExtResource("2_2xtf7")
+
+[node name="nw" type="Sprite2D" parent="."]
+position = Vector2(341, 133)
+texture = ExtResource("3_ql0c5")
+
+[node name="se" type="Sprite2D" parent="."]
+position = Vector2(207, 258)
+texture = ExtResource("4_pcsfl")
+
+[node name="sw" type="Sprite2D" parent="."]
+position = Vector2(317, 288)
+texture = ExtResource("5_xlvdv")

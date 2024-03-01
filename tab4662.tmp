@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://uosc1v2t2ahs"]
+
+[ext_resource type="PackedScene" uid="uid://cg45dtax8bfjw" path="res://tablet_screen.tscn" id="1_jx0fx"]
+
+[sub_resource type="GDScript" id="GDScript_mqojy"]
+script/source = "extends SubViewport
+
+
+func _ready():
+	#self.set_clear_mode(SubViewport.CLEAR_MODE_ONCE)
+	pass
+"
+
+[node name="TabletViewport" type="SubViewport"]
+script = SubResource("GDScript_mqojy")
+
+[node name="Tablet Screen" parent="." instance=ExtResource("1_jx0fx")]
