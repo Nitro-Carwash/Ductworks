@@ -7,6 +7,8 @@ extends CharacterBody3D
 @export var deceleration := 10
 @export var is_tablet_toggled = false
 
+var is_toggle_blocked = false
+
 func _physics_process(delta):
 	var movement_axis = Input.get_vector("move_forward", "move_backward", "move_left", "move_right")
 	
@@ -33,5 +35,9 @@ func _input(event):
 		self.rotation.y = rotation_y
 		self.rotation.x = rotation_x
 	if event.is_action_pressed("toggle_tablet"):
-		is_tablet_toggled = !is_tablet_toggled
-		pass
+		if !is_toggle_blocked:
+			is_tablet_toggled = !is_tablet_toggled
+			is_toggle_blocked = true
+
+func toggle_animation_complete_callback():
+	is_toggle_blocked = false
