@@ -1,9 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwd3g738jkfas"]
+[gd_scene load_steps=20 format=3 uid="uid://cwd3g738jkfas"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_of1yi"]
 [ext_resource type="PackedScene" uid="uid://cx80lvtbvvrm" path="res://tablet.tscn" id="2_701li"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ybbt"]
+
+[sub_resource type="Animation" id="Animation_q8ks1"]
+resource_name = "idle_default"
+
+[sub_resource type="Animation" id="Animation_722rp"]
+resource_name = "idle_active"
+
+[sub_resource type="Animation" id="Animation_3j0fg"]
+resource_name = "toggle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w2ngf"]
+_data = {
+"idle_active": SubResource("Animation_722rp"),
+"idle_default": SubResource("Animation_q8ks1"),
+"toggle": SubResource("Animation_3j0fg")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n3p1s"]
+animation = &"idle_active"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wxldb"]
+animation = &"idle_default"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5jbq7"]
+animation = &"toggle"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2m5us"]
+animation = &"toggle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3oq13"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yqckl"]
+advance_mode = 2
+advance_condition = &"toggle_pressed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e8ckt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p7op2"]
+advance_mode = 2
+advance_condition = &"toggle_pressed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aq7sd"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ijlmq"]
+states/End/position = Vector2(894, 180)
+states/Start/position = Vector2(232, 186)
+states/idle_active/node = SubResource("AnimationNodeAnimation_n3p1s")
+states/idle_active/position = Vector2(700, 180)
+states/idle_default/node = SubResource("AnimationNodeAnimation_wxldb")
+states/idle_default/position = Vector2(373, 186)
+states/toggle/node = SubResource("AnimationNodeAnimation_2m5us")
+states/toggle/position = Vector2(549, 242)
+"states/toggle back/node" = SubResource("AnimationNodeAnimation_5jbq7")
+"states/toggle back/position" = Vector2(549, 132)
+transitions = ["Start", "idle_default", SubResource("AnimationNodeStateMachineTransition_3oq13"), "idle_default", "toggle", SubResource("AnimationNodeStateMachineTransition_yqckl"), "toggle", "idle_active", SubResource("AnimationNodeStateMachineTransition_e8ckt"), "idle_active", "toggle back", SubResource("AnimationNodeStateMachineTransition_p7op2"), "toggle back", "idle_default", SubResource("AnimationNodeStateMachineTransition_aq7sd")]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_etiow"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8xeg3"]
+states/Start/position = Vector2(30, 175)
+states/StateMachine/node = SubResource("AnimationNodeStateMachine_ijlmq")
+states/StateMachine/position = Vector2(192, 175)
+transitions = ["Start", "StateMachine", SubResource("AnimationNodeStateMachineTransition_etiow")]
+graph_offset = Vector2(-221, 15)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_of1yi")
@@ -18,7 +87,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="HandPivot" type="Marker3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, -0.4, 0)
 
 [node name="Tablet" parent="Head/HandPivot" instance=ExtResource("2_701li")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201377, 0.167945, -0.748286)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.459741, -0.176375, -0.735864)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/HandPivot"]
+libraries = {
+"": SubResource("AnimationLibrary_w2ngf")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Head/HandPivot"]
+libraries = {
+"": SubResource("AnimationLibrary_w2ngf")
+}
+tree_root = SubResource("AnimationNodeStateMachine_8xeg3")
+anim_player = NodePath("../AnimationPlayer")
+parameters/StateMachine/conditions/toggle_pressed = false
