@@ -3,7 +3,7 @@ using Godot;
 
 namespace Ductworks.PuzzleElement;
 
-public partial class Generator : PuzzleElement
+public partial class Generator : PuzzleElementBase
 {
 	[Export]
 	private Node3D connectPoint;
@@ -15,9 +15,9 @@ public partial class Generator : PuzzleElement
 		return this.connectPoint.GlobalPosition;
 	}
 
-	private List<PuzzleElement> connections = new List<PuzzleElement>();
+	private List<PuzzleElementBase> connections = new List<PuzzleElementBase>();
 	
-	public void ConnectTo(PuzzleElement target)
+	public void ConnectTo(PuzzleElementBase target)
 	{
 		GD.Print(target.GetConnectionPoint().ToString());
 		GD.Print(this.GetConnectionPoint().ToString());

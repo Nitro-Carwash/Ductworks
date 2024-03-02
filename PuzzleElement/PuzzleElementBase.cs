@@ -2,7 +2,7 @@
 
 namespace Ductworks.PuzzleElement;
 
-public abstract partial class PuzzleElement : Node3D
+public abstract partial class PuzzleElementBase : Node3D
 {
 	[Export]
 	public Texture2D[] OrientationSprites;
