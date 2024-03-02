@@ -13,7 +13,7 @@ var last_event_pos2D = null
 var last_event_time: float = -1.0
 
 func _ready():
-	node_viewport.set_clear_mode(SubViewport.CLEAR_MODE_ONCE)
+	#node_viewport.set_clear_mode(SubViewport.CLEAR_MODE_ALWAYS)
 	
 	# Godot currently gives a nonsense error if you try to set the viewport material via the inspector, so we'll wait two frames and then create a new material and set it ourselves.
 	# The error doesn't actually seem to impact anything? But why risk it
