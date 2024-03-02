@@ -11,9 +11,12 @@ size = Vector2(80, 80)
 [node name="Tablet Screen" type="Node2D"]
 script = ExtResource("1_f0sv1")
 rotateArrowTexture = ExtResource("4_xbar1")
-rotateArrowXOffset = 30.0
-rotateArrowYOffset = 3.0
-rotateArrowScale = Vector2(0.134, 0.111)
+rotateArrowOffset = Vector2(30, -3)
+rotateArrowScale = Vector2(0.219, 0.14)
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 600.0
+offset_bottom = 400.0
 
 [node name="TileVisualReference" type="Node2D" parent="."]
 visible = false
@@ -26,16 +29,16 @@ texture = ExtResource("3_a4s55")
 position = Vector2(400, 183)
 texture = ExtResource("2_gsior")
 
-[node name="RotateArrow" type="Sprite2D" parent="TileVisualReference"]
-position = Vector2(430, 180)
-rotation = 1.5708
-scale = Vector2(0.134, 0.111)
-texture = ExtResource("4_xbar1")
-
 [node name="RotateArrow2" type="Sprite2D" parent="TileVisualReference"]
 position = Vector2(370, 186)
 rotation = -1.5708
-scale = Vector2(0.134, 0.111)
+scale = Vector2(0.219, 0.14)
+texture = ExtResource("4_xbar1")
+
+[node name="RotateArrow" type="Sprite2D" parent="TileVisualReference"]
+position = Vector2(430, 180)
+rotation = 1.5708
+scale = Vector2(0.219, 0.14)
 texture = ExtResource("4_xbar1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileVisualReference"]

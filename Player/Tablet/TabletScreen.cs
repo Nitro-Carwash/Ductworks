@@ -12,23 +12,10 @@ public partial class TabletScreen : Node2D
 	private Texture2D rotateArrowTexture;
 
 	[Export]
-	private float rotateArrowXOffset;
+	private Vector2 rotateArrowOffset;
 	
-	[Export]
-	private float rotateArrowYOffset;
-
 	[Export]
 	private Vector2 rotateArrowScale;
-	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
 
 	public void AddPuzzleElementToScreen(PuzzleElementBase puzzleElement, int tileCountX, int tileCountZ)
 	{
@@ -37,7 +24,7 @@ public partial class TabletScreen : Node2D
 		Vector2 tabletTileDimensions = new Vector2((float)maxX / tileCountX, (float)maxZ / tileCountZ);
 
 		TabletButton button = new TabletButton();
-		button.Initialize(puzzleElement, tabletTileDimensions);
+		button.Initialize(puzzleElement, tabletTileDimensions, rotateArrowTexture, rotateArrowOffset, rotateArrowScale);
 		this.AddChild(button);
 	}
 }

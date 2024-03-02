@@ -11,6 +11,9 @@ var last_event_pos2D = null
 var last_event_time: float = -1.0
 
 func _ready():
+	var v1 = Vector2(0.5,3)
+	var v2 = Vector2(2, 2)
+	print (v1 * v2)
 	node_viewport.set_clear_mode(SubViewport.CLEAR_MODE_ONCE)
 	
 	# Godot currently gives a nonsense error if you try to set the viewport material via the inspector, so we'll wait two frames and then create a new material and set it ourselves.

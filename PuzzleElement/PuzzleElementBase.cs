@@ -15,6 +15,8 @@ public abstract partial class PuzzleElementBase : Node3D
 		return 0;
 	}
 
+	public int GetNumberOfOrientations => this.OrientationSprites?.Length ?? 0;
+
 	public virtual Vector3 GetConnectionPoint()
 	{
 		return this.GlobalPosition;
