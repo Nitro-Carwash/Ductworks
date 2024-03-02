@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxhx67o8fttlg"]
+
+[ext_resource type="Script" path="res://PuzzleElement/Generator.cs" id="1_au15u"]
+[ext_resource type="Texture2D" uid="uid://cfcm4esoxxy0c" path="res://PuzzleElement/generator.png" id="2_r7nys"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_su5fj"]
+size = Vector3(2, 1.4, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4c7x"]
+size = Vector3(2, 1.4, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s35kw"]
+albedo_color = Color(0.756863, 0.72549, 0.054902, 1)
+uv1_scale = Vector3(1.795, 1.295, 1)
+uv1_offset = Vector3(0, 0.155, 0)
+
+[node name="Generator" type="Node3D"]
+script = ExtResource("1_au15u")
+OrientationSprites = Array[Texture2D]([ExtResource("2_r7nys")])
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_su5fj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_g4c7x")
+surface_material_override/0 = SubResource("StandardMaterial3D_s35kw")

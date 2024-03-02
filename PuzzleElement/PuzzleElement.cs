@@ -12,7 +12,7 @@ public abstract partial class PuzzleElement : Node3D
 
 	public virtual int GetOrientation()
 	{
-		return -1;
+		return 0;
 	}
 
 	public abstract void HandleOrientationChange(int newOrientation);

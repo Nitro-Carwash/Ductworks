@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://6dlic6alho3q"]
+[gd_scene load_steps=11 format=3 uid="uid://6dlic6alho3q"]
 
 [ext_resource type="Script" path="res://Level/Level.cs" id="1_m345s"]
 [ext_resource type="PackedScene" uid="uid://cwd3g738jkfas" path="res://Player/Player.tscn" id="1_q72gr"]
 [ext_resource type="PackedScene" uid="uid://bocv836ka7d0" path="res://PuzzleElement/PipeLong.tscn" id="2_d1qyf"]
 [ext_resource type="Texture2D" uid="uid://cu7p13n7n7hg6" path="res://Level/floor_debug.png" id="2_m33pf"]
+[ext_resource type="PackedScene" uid="uid://bxhx67o8fttlg" path="res://PuzzleElement/Generator.tscn" id="5_2hunn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7g86"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -63,9 +64,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 14)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 
 [node name="PipeLong7" parent="." instance=ExtResource("2_d1qyf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
 
 [node name="PipeLong8" parent="." instance=ExtResource("2_d1qyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="Generator" parent="." instance=ExtResource("5_2hunn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 
 [connection signal="PuzzleElementLoaded" from="." to="Player/Head/PlayerCamera/Tablet/TabletViewport/Tablet Screen" method="AddPuzzleElementToScreen"]
