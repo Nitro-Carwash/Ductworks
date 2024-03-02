@@ -8,7 +8,7 @@ extends CharacterBody3D
 @export var is_tablet_toggled = false
 
 @onready var head_node = $Head
-
+@onready var tablet_node = $Head/PlayerCamera/Tablet
 var is_toggle_blocked = false
 
 func _physics_process(delta):
@@ -44,6 +44,7 @@ func _input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 			else:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			tablet_node.set_input_enabled(is_tablet_toggled)
 			is_toggle_blocked = true
 
 func toggle_animation_complete_callback():

@@ -14,10 +14,6 @@ rotateArrowTexture = ExtResource("4_xbar1")
 rotateArrowOffset = Vector2(30, -3)
 rotateArrowScale = Vector2(0.219, 0.14)
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 600.0
-offset_bottom = 400.0
-
 [node name="TileVisualReference" type="Node2D" parent="."]
 visible = false
 

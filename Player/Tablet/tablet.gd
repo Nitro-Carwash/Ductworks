@@ -1,5 +1,7 @@
 extends Node3D
 
+signal tablet_is_receiving_input(new_toggle)
+
 @export var is_input_enabled = false
 @export var is_mouse_inside: bool
 
@@ -11,9 +13,6 @@ var last_event_pos2D = null
 var last_event_time: float = -1.0
 
 func _ready():
-	var v1 = Vector2(0.5,3)
-	var v2 = Vector2(2, 2)
-	print (v1 * v2)
 	node_viewport.set_clear_mode(SubViewport.CLEAR_MODE_ONCE)
 	
 	# Godot currently gives a nonsense error if you try to set the viewport material via the inspector, so we'll wait two frames and then create a new material and set it ourselves.
@@ -33,6 +32,9 @@ func _ready():
 	
 func set_input_enabled(input_enabled: bool):
 	self.is_input_enabled = input_enabled
+	if !input_enabled:
+		tablet_is_receiving_input.emit(false)
+	
 
 func on_mouse_entered_area():
 	self.is_mouse_inside = true
@@ -42,6 +44,10 @@ func on_mouse_exited_area():
 
 func handle_mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	# Taken from godot sample scene: https://github.com/godotengine/godot-demo-projects/tree/a69b2f7e215b1d5432959091ec90eb2b0044610c/viewport/gui_in_3d
+	
+	# When the tablet is enabled, the screen scene seems to immediately get a mouseenter event at (0,0) no matter what.
+	# So use this signal to disable mouse events explicitly until the tablet has gotten its first real input event
+	tablet_is_receiving_input.emit(true)
 	
 	var quad_mesh_size = node_screen_mesh.mesh.size
 	var event_pos3D = event_position

@@ -40,12 +40,6 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_q72gr")]
-vertical_angle_limit = 90.0
-mouse_sensitivity = 2.0
-speed = 10
-acceleration = 8
-deceleration = 10
-is_tablet_toggled = false
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_58271")
@@ -80,6 +74,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
-[connection signal="PuzzleElementLoaded" from="." to="Player/Head/PlayerCamera/Tablet/TabletViewport/Tablet Screen" method="AddPuzzleElementToScreen"]
+[node name="PipeLong9" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
-[editable path="PipeLong"]
+[connection signal="PuzzleElementLoaded" from="." to="Player/Head/PlayerCamera/Tablet/TabletViewport/Tablet Screen" method="AddPuzzleElementToScreen"]
