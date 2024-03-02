@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxhx67o8fttlg"]
+[gd_scene load_steps=8 format=3 uid="uid://bxhx67o8fttlg"]
 
 [ext_resource type="Script" path="res://PuzzleElement/Generator.cs" id="1_au15u"]
 [ext_resource type="Texture2D" uid="uid://cfcm4esoxxy0c" path="res://PuzzleElement/generator.png" id="2_r7nys"]
@@ -14,8 +14,14 @@ albedo_color = Color(0.756863, 0.72549, 0.054902, 1)
 uv1_scale = Vector3(1.795, 1.295, 1)
 uv1_offset = Vector3(0, 0.155, 0)
 
-[node name="Generator" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_n3xsf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtbeo"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Generator" type="Node3D" node_paths=PackedStringArray("connectPoint")]
 script = ExtResource("1_au15u")
+connectPoint = NodePath("Antenna/Marker3D")
 OrientationSprites = Array[Texture2D]([ExtResource("2_r7nys")])
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -27,3 +33,11 @@ shape = SubResource("BoxShape3D_su5fj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_g4c7x")
 surface_material_override/0 = SubResource("StandardMaterial3D_s35kw")
+
+[node name="Antenna" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.168003, 0, 0, 0, 1.37536, 0, 0, 0, 0.10671, 0.846789, 1.61393, -0.6139)
+mesh = SubResource("BoxMesh_n3xsf")
+surface_material_override/0 = SubResource("StandardMaterial3D_vtbeo")
+
+[node name="Marker3D" type="Marker3D" parent="Antenna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521909, 0)

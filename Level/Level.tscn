@@ -28,9 +28,10 @@ albedo_texture = ExtResource("2_m33pf")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 
-[node name="Level" type="Node3D" node_paths=PackedStringArray("Floor")]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("Floor", "testguy")]
 script = ExtResource("1_m345s")
 Floor = NodePath("Floor")
+testguy = NodePath("PipeLong/StaticBody3D/MeshInstance3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8ny4x")
@@ -72,4 +73,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 [node name="Generator" parent="." instance=ExtResource("5_2hunn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
 [connection signal="PuzzleElementLoaded" from="." to="Player/Head/PlayerCamera/Tablet/TabletViewport/Tablet Screen" method="AddPuzzleElementToScreen"]
+
+[editable path="PipeLong"]

@@ -15,5 +15,10 @@ public abstract partial class PuzzleElement : Node3D
 		return 0;
 	}
 
+	public virtual Vector3 GetConnectionPoint()
+	{
+		return this.GlobalPosition;
+	}
+
 	public abstract void HandleOrientationChange(int newOrientation);
 }
