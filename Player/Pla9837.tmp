@@ -1,28 +1,10 @@
 [gd_scene load_steps=26 format=3 uid="uid://cwd3g738jkfas"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_of1yi"]
-[ext_resource type="PackedScene" uid="uid://cx80lvtbvvrm" path="res://tablet.tscn" id="2_701li"]
-[ext_resource type="Script" path="res://HeldItemViewport.gd" id="3_hy7wf"]
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_of1yi"]
+[ext_resource type="PackedScene" uid="uid://cx80lvtbvvrm" path="res://Player/Tablet/tablet.tscn" id="2_701li"]
+[ext_resource type="Script" path="res://Player/Tablet/HeldItemViewport.gd" id="3_hy7wf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ybbt"]
-
-[sub_resource type="Animation" id="Animation_xur8t"]
-resource_name = "idle_default"
-loop_mode = 1
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.5, -0.8, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.707107, 0, 0.707107)
 
 [sub_resource type="Animation" id="Animation_ottcx"]
 resource_name = "idle_active"
@@ -41,6 +23,24 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.0984513, 0, 0, 0.995142)
+
+[sub_resource type="Animation" id="Animation_xur8t"]
+resource_name = "idle_default"
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.5, -0.8, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.707107, 0, 0.707107)
 
 [sub_resource type="Animation" id="Animation_ij22w"]
 resource_name = "toggle"
@@ -170,7 +170,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 cull_mask = 1048573
 
 [node name="Tablet" parent="Head/PlayerCamera" instance=ExtResource("2_701li")]
-transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 0.5, -0.8, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.5, -0.8, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/PlayerCamera/Tablet"]
 libraries = {

@@ -7,13 +7,15 @@ extends CharacterBody3D
 @export var deceleration := 10
 @export var is_tablet_toggled = false
 
+@onready var head_node = $Head
+
 var is_toggle_blocked = false
 
 func _physics_process(delta):
 	var movement_axis = Input.get_vector("move_forward", "move_backward", "move_left", "move_right")
 	
 	# Get direction we're moving in based on facing direction
-	var aim := self.get_global_transform().basis
+	var aim : Basis = head_node.get_global_transform().basis
 	var move_direction := Vector3()
 	if abs(movement_axis.x) >= 0.5:
 		move_direction += sign(movement_axis.x) * aim.z
@@ -31,10 +33,10 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			var rotation_y = self.rotation.y - event.relative.x * (mouse_sensitivity/1000)
-			var rotation_x = clamp(self.rotation.x - event.relative.y * (mouse_sensitivity/1000), -vertical_angle_limit, vertical_angle_limit)
-			self.rotation.y = rotation_y
-			self.rotation.x = rotation_x
+			var rotation_y = head_node.rotation.y - event.relative.x * (mouse_sensitivity/1000)
+			var rotation_x = clamp(head_node.rotation.x - event.relative.y * (mouse_sensitivity/1000), -deg_to_rad(vertical_angle_limit), deg_to_rad(vertical_angle_limit))
+			head_node.rotation.y = rotation_y
+			head_node.rotation.x = rotation_x
 	if event.is_action_pressed("toggle_tablet"):
 		if !is_toggle_blocked:
 			is_tablet_toggled = !is_tablet_toggled

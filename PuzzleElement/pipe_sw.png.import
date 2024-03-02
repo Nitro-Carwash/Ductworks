@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwl4jkkmic72x"
-path="res://.godot/imported/pipe_se.png-71d346b34210494100dc4ef3f5cb16f8.ctex"
+uid="uid://cjc2btevejky0"
+path="res://.godot/imported/pipe_sw.png-419fecf264a37dd996c8338869292dd0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pipe_se.png"
-dest_files=["res://.godot/imported/pipe_se.png-71d346b34210494100dc4ef3f5cb16f8.ctex"]
+source_file="res://PuzzleElement/pipe_sw.png"
+dest_files=["res://.godot/imported/pipe_sw.png-419fecf264a37dd996c8338869292dd0.ctex"]
 
 [params]
 

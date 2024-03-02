@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cx80lvtbvvrm"]
 
-[ext_resource type="Script" path="res://tablet.gd" id="1_ptblp"]
-[ext_resource type="PackedScene" uid="uid://cg45dtax8bfjw" path="res://tablet_screen.tscn" id="2_ou54n"]
+[ext_resource type="Script" path="res://Player/Tablet/tablet.gd" id="1_erqew"]
+[ext_resource type="PackedScene" uid="uid://cg45dtax8bfjw" path="res://Player/Tablet/tablet_screen.tscn" id="2_x08eg"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_mdcjy"]
 size = Vector2(0.685, 0.51)
@@ -38,7 +38,7 @@ height = 0.95
 albedo_color = Color(0.129412, 0.14902, 0.180392, 1)
 
 [node name="Tablet" type="Node3D"]
-script = ExtResource("1_ptblp")
+script = ExtResource("1_erqew")
 
 [node name="TabletScreenMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.130134)
@@ -69,4 +69,4 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ipwld")
 transparent_bg = true
 size = Vector2i(600, 400)
 
-[node name="Tablet" parent="TabletViewport" instance=ExtResource("2_ou54n")]
+[node name="Tablet" parent="TabletViewport" instance=ExtResource("2_x08eg")]
