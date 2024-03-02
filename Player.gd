@@ -42,7 +42,6 @@ func _input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 			else:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			
 			is_toggle_blocked = true
 
 func toggle_animation_complete_callback():

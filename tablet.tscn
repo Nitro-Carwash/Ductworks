@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx80lvtbvvrm"]
+[gd_scene load_steps=12 format=3 uid="uid://cx80lvtbvvrm"]
 
 [ext_resource type="Script" path="res://tablet.gd" id="1_ptblp"]
 [ext_resource type="PackedScene" uid="uid://cg45dtax8bfjw" path="res://tablet_screen.tscn" id="2_ou54n"]
@@ -19,6 +19,9 @@ albedo_texture = SubResource("ViewportTexture_itgaa")
 emission_enabled = true
 emission_texture = SubResource("ViewportTexture_1hcmx")
 subsurf_scatter_strength = 0.17
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1npc7"]
+size = Vector3(0.685, 0.51, 0.001)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m22i4"]
 size = Vector3(1, 0.8, 0.3)
@@ -42,6 +45,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.130134)
 layers = 2
 mesh = SubResource("QuadMesh_mdcjy")
 surface_material_override/0 = SubResource("StandardMaterial3D_g5x6p")
+
+[node name="Area3D" type="Area3D" parent="TabletScreenMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TabletScreenMesh/Area3D"]
+shape = SubResource("BoxShape3D_1npc7")
 
 [node name="TabletModel" type="Node3D" parent="."]
 transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 0, 0, 0)
