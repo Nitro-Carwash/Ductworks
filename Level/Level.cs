@@ -7,6 +7,9 @@ public partial class Level : Node3D
 {
 	[Export]
 	private MeshInstance3D Floor;
+	
+	[Signal]
+	public delegate void PuzzleElementLoadedEventHandler(PuzzleElement puzzleElements, int tileCountX, int tileCountZ);
 
 	private int tileCountX;
 	private int tileCountZ;
@@ -28,6 +31,8 @@ public partial class Level : Node3D
 			newPosition /= 4;
 			newPosition += gridOffset;
 			p.GridPosition = newPosition;
+			
+			this.EmitSignal(SignalName.PuzzleElementLoaded, p, this.tileCountX, this.tileCountZ);
 		}
 	}
 

@@ -69,4 +69,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ipwld")
 transparent_bg = true
 size = Vector2i(600, 400)
 
-[node name="Tablet" parent="TabletViewport" instance=ExtResource("2_x08eg")]
+[node name="Tablet Screen" parent="TabletViewport" node_paths=PackedStringArray("screenViewport") instance=ExtResource("2_x08eg")]
+screenViewport = NodePath("..")

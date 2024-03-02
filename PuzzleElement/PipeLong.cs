@@ -21,6 +21,11 @@ public partial class PipeLong : Pipe
 	{
 	}
 
+	public override int GetOrientation()
+	{
+		return 0;
+	}
+
 	public override void HandleOrientationChange(int newOrientation)
 	{
 		

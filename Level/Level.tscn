@@ -67,3 +67,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="PipeLong8" parent="." instance=ExtResource("2_d1qyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[connection signal="PuzzleElementLoaded" from="." to="Player/Head/PlayerCamera/Tablet/TabletViewport/Tablet Screen" method="AddPuzzleElementToScreen"]
