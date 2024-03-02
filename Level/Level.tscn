@@ -1,12 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://6dlic6alho3q"]
 
+[ext_resource type="Script" path="res://Level/Level.cs" id="1_m345s"]
 [ext_resource type="PackedScene" uid="uid://cwd3g738jkfas" path="res://Player/Player.tscn" id="1_q72gr"]
 [ext_resource type="PackedScene" uid="uid://bocv836ka7d0" path="res://PuzzleElement/PipeLong.tscn" id="2_d1qyf"]
 [ext_resource type="Texture2D" uid="uid://cu7p13n7n7hg6" path="res://Level/floor_debug.png" id="2_m33pf"]
-
-[sub_resource type="GDScript" id="GDScript_6ra1h"]
-script/source = "extends Node3D
-"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7g86"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,11 +25,11 @@ size = Vector2(32, 32)
 albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
 albedo_texture = ExtResource("2_m33pf")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
-uv1_offset = Vector3(0.5, 0, 0)
 uv1_triplanar = true
 
-[node name="Level" type="Node3D"]
-script = SubResource("GDScript_6ra1h")
+[node name="Level" type="Node3D" node_paths=PackedStringArray("Floor")]
+script = ExtResource("1_m345s")
+Floor = NodePath("Floor")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8ny4x")
@@ -48,4 +45,25 @@ mesh = SubResource("PlaneMesh_58271")
 surface_material_override/0 = SubResource("StandardMaterial3D_lykuf")
 
 [node name="PipeLong" parent="." instance=ExtResource("2_d1qyf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="PipeLong2" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
+
+[node name="PipeLong3" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
+
+[node name="PipeLong4" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 14)
+
+[node name="PipeLong5" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 14)
+
+[node name="PipeLong6" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="PipeLong7" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="PipeLong8" parent="." instance=ExtResource("2_d1qyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)

@@ -7,6 +7,9 @@ public abstract partial class PuzzleElement : Node3D
 	[Export]
 	public Texture2D[] OrientationSprites;
 
+	[Export]
+	public Vector2 GridPosition = new Vector2(-1, -1);
+
 	public virtual int GetOrientation()
 	{
 		return -1;
