@@ -1,20 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bocv836ka7d0"]
+[gd_scene load_steps=7 format=3 uid="uid://bocv836ka7d0"]
 
 [ext_resource type="Script" path="res://PuzzleElement/PipeLong.cs" id="1_klhlv"]
 [ext_resource type="Texture2D" uid="uid://fpbcctoh7lij" path="res://PuzzleElement/pipe_long_ns.png" id="2_v52o4"]
 [ext_resource type="Texture2D" uid="uid://b6jg310m4qk2" path="res://PuzzleElement/pipe_long_ew.png" id="3_j6fo3"]
-[ext_resource type="Texture2D" uid="uid://c4sjm5p7y320d" path="res://PuzzleElement/fence_color.png" id="4_t58t2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ru0t"]
-size = Vector3(1, 1, 0.33)
+size = Vector3(4, 1.4, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dvg03"]
-size = Vector3(4, 1.4, 1)
+size = Vector3(4, 1.4, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnikm"]
-transparency = 1
-albedo_texture = ExtResource("4_t58t2")
-uv1_scale = Vector3(1.795, 1.925, 1)
+albedo_color = Color(0.129412, 0.65098, 0.733333, 1)
+uv1_scale = Vector3(1.795, 1.295, 1)
+uv1_offset = Vector3(0, 0.155, 0)
 
 [node name="PipeLong" type="Node3D"]
 script = ExtResource("1_klhlv")

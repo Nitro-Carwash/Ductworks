@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4sjm5p7y320d"
-path.s3tc="res://.godot/imported/fence_color.png-b949d6f409c1b7b2ffab4dec0cbc6026.s3tc.ctex"
+uid="uid://cu7p13n7n7hg6"
+path.s3tc="res://.godot/imported/floor_debug.png-6fe9e6284c2b7c99186c21e5426ceff6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://PuzzleElement/fence_color.png"
-dest_files=["res://.godot/imported/fence_color.png-b949d6f409c1b7b2ffab4dec0cbc6026.s3tc.ctex"]
+source_file="res://Level/floor_debug.png"
+dest_files=["res://.godot/imported/floor_debug.png-6fe9e6284c2b7c99186c21e5426ceff6.s3tc.ctex"]
 
 [params]
 
