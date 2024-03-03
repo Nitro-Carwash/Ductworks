@@ -8,6 +8,8 @@ public class ConnectionLineManager
 	public Node2D Owner;
 
 	public bool IsBlockingHovers => this.isInSeveringMode || (this.currentLine?.enabled ?? false);
+	
+	public SeverLine SeverLine;
 
 	private List<ConnectionLine> connections = new List<ConnectionLine>();
 
@@ -75,6 +77,7 @@ public class ConnectionLineManager
 	private void ToggleSeveringMode(bool isToggled)
 	{
 		this.isInSeveringMode = isToggled;
+		this.SeverLine.Enabled = isToggled;
 		foreach (var connection in this.connections)
 		{
 			connection.Area2D.InputPickable = isToggled;

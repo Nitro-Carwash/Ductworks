@@ -21,6 +21,9 @@ public partial class TabletScreen : Node2D
 	[Export]
 	private PackedScene rotateArrowScene;
 
+	[Export]
+	public SeverLine SeverLine;
+
 	private readonly List<TabletButton> buttons = new List<TabletButton>();
 	
 	private readonly ConnectionLineManager connectionLineManager = new ConnectionLineManager();
@@ -32,6 +35,7 @@ public partial class TabletScreen : Node2D
 	public override void _Ready()
 	{
 		this.connectionLineManager.Owner = this;
+		this.connectionLineManager.SeverLine = this.SeverLine;
 	}
 
 	public override void _Input(InputEvent @event)
