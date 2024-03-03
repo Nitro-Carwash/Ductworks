@@ -18,6 +18,9 @@ public partial class TabletScreen : Node2D
 	[Export]
 	private Vector2 rotateArrowScale;
 
+	[Export]
+	private PackedScene rotateArrowScene;
+
 	private readonly List<TabletButton> buttons = new List<TabletButton>();
 
 	private bool tabletIsEnabled = false;
@@ -29,7 +32,7 @@ public partial class TabletScreen : Node2D
 		Vector2 tabletTileDimensions = new Vector2((float)maxX / tileCountX, (float)maxZ / tileCountZ);
 
 		TabletButton button = new TabletButton();
-		button.Initialize(puzzleElement, tabletTileDimensions, this.rotateArrowTexture, this.rotateArrowOffset, this.rotateArrowScale);
+		button.Initialize(puzzleElement, tabletTileDimensions, this.rotateArrowScene);
 		this.AddChild(button);
 		this.buttons.Add(button);
 	}

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdubbvpf3b6g2"]
+
+[ext_resource type="Texture2D" uid="uid://dci3i8iwfqvi0" path="res://Player/Tablet/rotate_arrow.svg" id="3_w6fti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_voj58"]
+size = Vector2(28, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjyiw"]
+size = Vector2(35, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vsrq0"]
+size = Vector2(28, 18)
+
+[node name="RotateButtonTemplate" type="Node2D"]
+
+[node name="RightArrow" type="Node2D" parent="."]
+
+[node name="RotateArrowSprite" type="Sprite2D" parent="RightArrow"]
+z_index = 10
+position = Vector2(42, -6)
+rotation = 1.5708
+scale = Vector2(0.24365, 0.311436)
+texture = ExtResource("3_w6fti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArrow"]
+position = Vector2(28, -26.5)
+shape = SubResource("RectangleShape2D_voj58")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RightArrow"]
+position = Vector2(54.5, -2)
+shape = SubResource("RectangleShape2D_qjyiw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="RightArrow"]
+position = Vector2(28, 22)
+shape = SubResource("RectangleShape2D_vsrq0")
+
+[node name="LeftArrow" type="Node2D" parent="."]
+
+[node name="RotateArrowSprite" type="Sprite2D" parent="LeftArrow"]
+z_index = 10
+position = Vector2(-42, 6)
+rotation = -1.5708
+scale = Vector2(0.24365, 0.311436)
+texture = ExtResource("3_w6fti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArrow"]
+position = Vector2(-28, 26)
+shape = SubResource("RectangleShape2D_voj58")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LeftArrow"]
+position = Vector2(-53, 1)
+shape = SubResource("RectangleShape2D_qjyiw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LeftArrow"]
+position = Vector2(-28, -22)
+shape = SubResource("RectangleShape2D_vsrq0")

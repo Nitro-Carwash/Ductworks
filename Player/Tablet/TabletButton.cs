@@ -13,7 +13,7 @@ public partial class TabletButton : Area2D
 		this.MouseExited += this.HandleMouseExit;
 	}
 
-	public void Initialize(PuzzleElementBase puzzleElement, Vector2 tabletTileDimensions, Texture2D rotateArrowTexture, Vector2 rotateArrowOffset, Vector2 rotateArrowScale)
+	public void Initialize(PuzzleElementBase puzzleElement, Vector2 tabletTileDimensions, PackedScene rotateArrowScene)
 	{
 		var spriteScale = tabletTileDimensions / 80;
         
@@ -27,15 +27,15 @@ public partial class TabletButton : Area2D
 
 		if (puzzleElement.GetNumberOfOrientations > 1)
 		{
+			Node rotateArrowSceneRoot = rotateArrowScene.Instantiate();
+			
 			this.rotateRight = new RotationButton();
-			this.rotateRight.Initialize(rotateArrowTexture, spriteScale * rotateArrowScale, Mathf.DegToRad(90f));
+			this.rotateRight.Initialize(rotateArrowSceneRoot.GetChild(0));
 			this.AddChild(this.rotateRight);
-			this.rotateRight.Position += rotateArrowOffset;
 			
 			this.rotateLeft = new RotationButton();
-			this.rotateLeft.Initialize(rotateArrowTexture, spriteScale * rotateArrowScale, Mathf.DegToRad(-90f));
+			this.rotateRight.Initialize(rotateArrowSceneRoot.GetChild(1));
 			this.AddChild(this.rotateLeft);
-			this.rotateLeft.Position -= rotateArrowOffset;
 		}
 
 		this.InputPickable = false;
