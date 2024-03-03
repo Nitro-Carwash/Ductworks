@@ -52,5 +52,8 @@ public partial class ConnectionLine : Line2D
 		this.Area2D = new Area2D();
 		this.Area2D.AddChild(collision);
 		this.AddChild(this.Area2D);
+		this.Area2D.InputPickable = false;
+		// temp
+		this.Area2D.Visible = false;
 	}
 }

@@ -10,6 +10,8 @@ public class ConnectionLineManager
 	private List<ConnectionLine> connections = new List<ConnectionLine>();
 
 	private ConnectionLine currentLine;
+
+	private bool isInSeveringMode;
 	
 	public void HandleClickOnNothing()
 	{
@@ -18,6 +20,7 @@ public class ConnectionLineManager
 			this.currentLine.ClearPoints();
 			this.currentLine.enabled = false;
 		}
+		this.ToggleSeveringMode(true);
 	}
 
 	public void HandleClickOnButton(TabletButton target)
@@ -34,6 +37,7 @@ public class ConnectionLineManager
 			{
 				this.currentLine.StartLine(target.Position);
 			}
+			this.ToggleSeveringMode(false);
 		}
 		else if (target.PuzzleElement.CanReceivePowerConnection)
 		{
@@ -48,6 +52,27 @@ public class ConnectionLineManager
 		{
 			// Do this if we have new tablet buttons that should cancel
 			this.HandleClickOnNothing();
+		}
+	}
+
+	public void HandleReleaseOnNothing()
+	{
+		this.ToggleSeveringMode(false);
+	}
+	
+	public void HandleReleaseOnButton(TabletButton button)
+	{
+		// Handle severing case
+		this.HandleClickOnButton(button);
+	}
+
+	private void ToggleSeveringMode(bool isToggled)
+	{
+		this.isInSeveringMode = isToggled;
+		foreach (var connection in this.connections)
+		{
+			connection.Area2D.InputPickable = isToggled;
+			connection.Area2D.Visible = isToggled;
 		}
 	}
 }

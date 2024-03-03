@@ -54,11 +54,11 @@ public partial class TabletScreen : Node2D
 			{
 				if (this.currentlyHoveredTabletButton != null)
 				{
-					this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
+					this.connectionLineManager.HandleReleaseOnButton(this.currentlyHoveredTabletButton);
 				}
 				else
 				{
-					this.connectionLineManager.HandleClickOnNothing();
+					this.connectionLineManager.HandleReleaseOnNothing();
 				}
 			}
 		}
