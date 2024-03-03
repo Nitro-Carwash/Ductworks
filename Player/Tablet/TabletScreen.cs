@@ -43,7 +43,11 @@ public partial class TabletScreen : Node2D
 			{
 				if (this.currentlyHoveredTabletButton != null)
 				{
-					this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
+					bool wasConnectionMade = this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
+					if (wasConnectionMade)
+					{
+						this.currentlyHoveredTabletButton.HandleMouseover();
+					}
 				}
 				else
 				{
@@ -54,7 +58,13 @@ public partial class TabletScreen : Node2D
 			{
 				if (this.currentlyHoveredTabletButton != null)
 				{
-					this.connectionLineManager.HandleReleaseOnButton(this.currentlyHoveredTabletButton);
+					GD.Print("trying release");
+					bool wasConnectionMade = this.connectionLineManager.HandleReleaseOnButton(this.currentlyHoveredTabletButton);
+					if (wasConnectionMade)
+					{
+						GD.Print("trying succeeded");
+						this.currentlyHoveredTabletButton.HandleMouseover();
+					}
 				}
 				else
 				{
@@ -71,11 +81,18 @@ public partial class TabletScreen : Node2D
 		Vector2 tabletTileDimensions = new Vector2((float)maxX / tileCountX, (float)maxZ / tileCountZ);
 
 		TabletButton button = new TabletButton();
-		button.Initialize(puzzleElement, tabletTileDimensions, this.rotateArrowScene);
+		button.Initialize(puzzleElement, tabletTileDimensions, this.rotateArrowScene, this);
 		this.AddChild(button);
 		this.buttons.Add(button);
 		button.MouseEnteredTabletButton += this.HandlePuzzleButtonMouseEnter;
 		button.MouseExitedTabletButton += this.HandlePuzzleButtonMouseExit;
+	}
+
+	// Surely there's some better way involving capturing input and preventing it from bubbling down right? haha.
+	// Well it seems totally broken so I'm giving up and writing slop
+	public bool GetAreMouseoversAllowedToBeDrawn(TabletButton asker)
+	{
+		return (this.currentlyHoveredTabletButton == null || this.currentlyHoveredTabletButton == asker) && !this.connectionLineManager.IsBlockingHovers;
 	}
 
 	// When the tablet is enabled, the screen scene seems to immediately get a mouseenter event at (0,0) no matter what.

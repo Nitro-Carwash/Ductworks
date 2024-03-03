@@ -16,6 +16,8 @@ public partial class TabletButton : Area2D
 	private RotationButton rotateRight, rotateLeft;
 	
 	private bool isHovered;
+
+	private TabletScreen tabletScreen;
 	
 	public override void _Ready()
 	{
@@ -23,9 +25,10 @@ public partial class TabletButton : Area2D
 		this.MouseExited += this.HandleMouseExit;
 	}
 
-	public void Initialize(PuzzleElementBase puzzleElement, Vector2 tabletTileDimensions, PackedScene rotateArrowScene)
+	public void Initialize(PuzzleElementBase puzzleElement, Vector2 tabletTileDimensions, PackedScene rotateArrowScene, TabletScreen tabletScreen)
 	{
 		this.PuzzleElement = puzzleElement;
+		this.tabletScreen = tabletScreen;
 		
 		var spriteScale = tabletTileDimensions / 80;
         
@@ -83,11 +86,14 @@ public partial class TabletButton : Area2D
 		this.AddChild(sprite);
 	}
 
-	private void HandleMouseover()
+	public void HandleMouseover()
 	{
 		this.isHovered = true;
-		this.rotateRight?.OnParentHoverUpdated(true);
-		this.rotateLeft?.OnParentHoverUpdated(true);
+		if (this.tabletScreen.GetAreMouseoversAllowedToBeDrawn(this))
+		{
+			this.rotateRight?.OnParentHoverUpdated(true);
+			this.rotateLeft?.OnParentHoverUpdated(true);
+		}
 		this.EmitSignal(SignalName.MouseEnteredTabletButton, this);
 	}
 	

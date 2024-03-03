@@ -7,6 +7,8 @@ public class ConnectionLineManager
 {
 	public Node2D Owner;
 
+	public bool IsBlockingHovers => this.isInSeveringMode || (this.currentLine?.enabled ?? false);
+
 	private List<ConnectionLine> connections = new List<ConnectionLine>();
 
 	private ConnectionLine currentLine;
@@ -23,8 +25,9 @@ public class ConnectionLineManager
 		this.ToggleSeveringMode(true);
 	}
 
-	public void HandleClickOnButton(TabletButton target)
+	public bool HandleClickOnButton(TabletButton target)
 	{
+		bool wasConnectionMade = false;
 		if (target.PuzzleElement.CanStartPowerConnection)
 		{
 			if (this.currentLine == null)
@@ -46,6 +49,7 @@ public class ConnectionLineManager
 				this.currentLine.FinishLine(target.Position);
 				this.connections.Add(this.currentLine);
 				this.currentLine = null;
+				wasConnectionMade = true;
 			}
 		}
 		else
@@ -53,6 +57,8 @@ public class ConnectionLineManager
 			// Do this if we have new tablet buttons that should cancel
 			this.HandleClickOnNothing();
 		}
+
+		return wasConnectionMade;
 	}
 
 	public void HandleReleaseOnNothing()
@@ -60,10 +66,10 @@ public class ConnectionLineManager
 		this.ToggleSeveringMode(false);
 	}
 	
-	public void HandleReleaseOnButton(TabletButton button)
+	public bool HandleReleaseOnButton(TabletButton button)
 	{
 		// Handle severing case
-		this.HandleClickOnButton(button);
+		return this.HandleClickOnButton(button);
 	}
 
 	private void ToggleSeveringMode(bool isToggled)

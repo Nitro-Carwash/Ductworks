@@ -53,7 +53,7 @@ public partial class ConnectionLine : Line2D
 		this.Area2D.AddChild(collision);
 		this.AddChild(this.Area2D);
 		this.Area2D.InputPickable = false;
-		// temp
+		// No impact on visuals during an actual build, but makes debugging easier
 		this.Area2D.Visible = false;
 	}
 }
