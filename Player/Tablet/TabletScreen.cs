@@ -34,9 +34,20 @@ public partial class TabletScreen : Node2D
 	{
 		if (@event is InputEventMouseButton)
 		{
-			if (this.currentlyHoveredTabletButton?.PuzzleElement.CanStartPowerConnection ?? false)
+			var mouseButtonEvent = (InputEventMouseButton)@event;
+			if (mouseButtonEvent.IsActionPressed("tablet_interact", allowEcho: false, exactMatch: false))
 			{
-				this.connectionLine.StartLine(((InputEventMouseButton)@event).GlobalPosition);
+				if (this.currentlyHoveredTabletButton?.PuzzleElement.CanStartPowerConnection ?? false)
+				{
+					this.connectionLine.StartLine(this.currentlyHoveredTabletButton.Position);
+				}
+			}
+			else if (mouseButtonEvent.IsActionReleased("tablet_interact", exactMatch: false))
+			{
+				if (this.connectionLine.enabled && (this.currentlyHoveredTabletButton?.PuzzleElement.CanReceivePowerConnection ?? false))
+				{
+					this.connectionLine.FinishLine(this.currentlyHoveredTabletButton.Position);
+				}
 			}
 		}
 	}
@@ -66,7 +77,7 @@ public partial class TabletScreen : Node2D
 		}
 		if (!shouldBeEnabled)
 		{
-			this.connectionLine.enabled = shouldBeEnabled;
+			this.connectionLine.enabled = false;
 		}
 
 		foreach (TabletButton button in this.buttons)

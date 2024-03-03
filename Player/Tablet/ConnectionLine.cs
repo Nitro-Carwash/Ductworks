@@ -28,4 +28,12 @@ public partial class ConnectionLine : Line2D
 		this.startPos = pos;
 		this.enabled = true;
 	}
+
+	public void FinishLine(Vector2 pos)
+	{
+		this.ClearPoints();
+		this.AddPoint(this.startPos);
+		this.AddPoint(pos);
+		this.enabled = false;
+	}
 }

@@ -18,6 +18,7 @@ uv1_offset = Vector3(0, 0.155, 0)
 [node name="PipeLong" type="Node3D"]
 script = ExtResource("1_klhlv")
 OrientationSprites = Array[Texture2D]([ExtResource("2_v52o4"), ExtResource("3_j6fo3")])
+CanReceivePowerConnection = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

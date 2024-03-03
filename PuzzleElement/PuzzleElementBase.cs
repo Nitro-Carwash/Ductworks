@@ -12,6 +12,9 @@ public abstract partial class PuzzleElementBase : Node3D
 
 	[Export]
 	public bool CanStartPowerConnection = false;
+	
+	[Export]
+	public bool CanReceivePowerConnection = false;
 
 	public virtual int GetOrientation()
 	{
