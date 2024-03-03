@@ -25,6 +25,8 @@ public partial class TabletScreen : Node2D
 
 	private bool tabletIsEnabled = false;
 
+	private bool lastHoveredTabletButton;
+
 	public void AddPuzzleElementToScreen(PuzzleElementBase puzzleElement, int tileCountX, int tileCountZ)
 	{
 		int maxX = this.screenViewport.Size.X;
@@ -35,6 +37,8 @@ public partial class TabletScreen : Node2D
 		button.Initialize(puzzleElement, tabletTileDimensions, this.rotateArrowScene);
 		this.AddChild(button);
 		this.buttons.Add(button);
+		button.MouseEnteredTabletButton += this.HandlePuzzleButtonMouseEnter;
+		button.MouseExitedTabletButton += this.HandlePuzzleButtonMouseExit;
 	}
 
 	// When the tablet is enabled, the screen scene seems to immediately get a mouseenter event at (0,0) no matter what.
@@ -53,5 +57,27 @@ public partial class TabletScreen : Node2D
 		}
 		
 		this.tabletIsEnabled = shouldBeEnabled;
+	}
+
+	private void HandlePuzzleButtonMouseEnter(TabletButton instigator)
+	{
+		GD.Print(instigator.Name);
+		foreach (var button in this.buttons)
+		{
+			if (button == instigator)
+			{
+				continue;
+			}
+			button.InputPickable = false;
+		}
+	}
+	
+	private void HandlePuzzleButtonMouseExit(TabletButton instigator)
+	{
+		GD.Print("Screen exit");
+		foreach (var button in this.buttons)
+		{
+			button.InputPickable = true;
+		}
 	}
 }

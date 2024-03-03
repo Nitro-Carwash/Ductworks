@@ -5,7 +5,15 @@ namespace Ductworks.Player.Tablet;
 
 public partial class TabletButton : Area2D
 {
+	[Signal]
+	public delegate void MouseEnteredTabletButtonEventHandler(TabletButton tabletButton);
+	
+	[Signal]
+	public delegate void MouseExitedTabletButtonEventHandler(TabletButton tabletButton);
+	
 	private RotationButton rotateRight, rotateLeft;
+
+	private bool isHovered;
 	
 	public override void _Ready()
 	{
@@ -30,11 +38,11 @@ public partial class TabletButton : Area2D
 			Node rotateArrowSceneRoot = rotateArrowScene.Instantiate();
 			
 			this.rotateRight = new RotationButton();
-			this.rotateRight.Initialize(rotateArrowSceneRoot.GetChild(0));
+			this.rotateRight.Initialize(rotateArrowSceneRoot.GetChild(0), this);
 			this.AddChild(this.rotateRight);
 			
 			this.rotateLeft = new RotationButton();
-			this.rotateRight.Initialize(rotateArrowSceneRoot.GetChild(1));
+			this.rotateRight.Initialize(rotateArrowSceneRoot.GetChild(1), this);
 			this.AddChild(this.rotateLeft);
 		}
 
@@ -46,8 +54,17 @@ public partial class TabletButton : Area2D
 		this.InputPickable = shouldBeEnabled;
 		if (!shouldBeEnabled)
 		{
-			this.rotateRight?.ToggleVisibility(false);
-			this.rotateLeft?.ToggleVisibility(false);
+			this.rotateRight?.OnParentHoverUpdated(false);
+			this.rotateLeft?.OnParentHoverUpdated(false);
+		}
+	}
+	
+	public void HandleRotationButtonMouseExit()
+	{
+		// If nothing to do with this tablet is hovered, then emit the signal.
+		if (!this.isHovered && (this.rotateRight == null || !this.rotateRight.IsHovered) && (this.rotateLeft == null || !this.rotateLeft.IsHovered))
+		{
+			this.EmitSignal(SignalName.MouseExitedTabletButton, this);
 		}
 	}
 	
@@ -64,15 +81,17 @@ public partial class TabletButton : Area2D
 
 	private void HandleMouseover()
 	{
-		GD.Print("Hovered");
-		this.rotateRight?.ToggleVisibility(true);
-		this.rotateLeft?.ToggleVisibility(true);
+		this.isHovered = true;
+		this.rotateRight?.OnParentHoverUpdated(true);
+		this.rotateLeft?.OnParentHoverUpdated(true);
+		this.EmitSignal(SignalName.MouseEnteredTabletButton, this);
 	}
 	
 	private void HandleMouseExit()
 	{
-		GD.Print("Unhovered");
-		this.rotateRight?.ToggleVisibility(false);
-		this.rotateLeft?.ToggleVisibility(false);
+		this.isHovered = false;
+		this.rotateRight?.OnParentHoverUpdated(false);
+		this.rotateLeft?.OnParentHoverUpdated(false);
+		this.HandleRotationButtonMouseExit();
 	}
 }
