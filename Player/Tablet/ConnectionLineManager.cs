@@ -11,14 +11,13 @@ public class ConnectionLineManager
 
 	private ConnectionLine currentLine;
 	
-	public ConnectionLineManager()
-	{
-		
-	}
-
 	public void HandleClickOnNothing()
 	{
-		
+		if (this.currentLine != null)
+		{
+			this.currentLine.ClearPoints();
+			this.currentLine.enabled = false;
+		}
 	}
 
 	public void HandleClickOnButton(TabletButton target)
@@ -44,6 +43,11 @@ public class ConnectionLineManager
 				this.connections.Add(this.currentLine);
 				this.currentLine = null;
 			}
+		}
+		else
+		{
+			// Do this if we have new tablet buttons that should cancel
+			this.HandleClickOnNothing();
 		}
 	}
 }

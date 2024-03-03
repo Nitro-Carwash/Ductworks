@@ -45,12 +45,20 @@ public partial class TabletScreen : Node2D
 				{
 					this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
 				}
+				else
+				{
+					this.connectionLineManager.HandleClickOnNothing();
+				}
 			}
 			else if (mouseButtonEvent.IsActionReleased("tablet_interact", exactMatch: false))
 			{
 				if (this.currentlyHoveredTabletButton != null)
 				{
 					this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
+				}
+				else
+				{
+					this.connectionLineManager.HandleClickOnNothing();
 				}
 			}
 		}
