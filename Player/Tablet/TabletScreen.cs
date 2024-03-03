@@ -113,6 +113,10 @@ public partial class TabletScreen : Node2D
 		}
 		
 		this.tabletIsEnabled = shouldBeEnabled;
+		if (!shouldBeEnabled)
+		{
+			this.connectionLineManager.HandleReleaseOnNothing();
+		}
 	}
 
 	private void HandlePuzzleButtonMouseEnter(TabletButton instigator)

@@ -93,6 +93,11 @@ public partial class ConnectionLineManager : Node2D
 
 	public void HandleReleaseOnNothing()
 	{
+		if (this.currentLine != null)
+		{
+			this.currentLine.ClearPoints();
+			this.currentLine.enabled = false;
+		}
 		this.ToggleSeveringMode(false);
 	}
 	

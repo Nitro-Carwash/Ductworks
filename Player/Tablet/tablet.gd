@@ -29,18 +29,17 @@ func _ready():
 	node_screen_mesh_area.mouse_exited.connect(self.on_mouse_exited_area)
 	node_screen_mesh_area.input_event.connect(self.handle_mouse_input_event)
 	
-	
 func set_input_enabled(input_enabled: bool):
 	self.is_input_enabled = input_enabled
 	if !input_enabled:
 		tablet_is_receiving_input.emit(false)
 	
-
 func on_mouse_entered_area():
 	self.is_mouse_inside = true
 
 func on_mouse_exited_area():
 	self.is_mouse_inside = false
+	tablet_is_receiving_input.emit(false)
 
 func handle_mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	# Taken from godot sample scene: https://github.com/godotengine/godot-demo-projects/tree/a69b2f7e215b1d5432959091ec90eb2b0044610c/viewport/gui_in_3d
