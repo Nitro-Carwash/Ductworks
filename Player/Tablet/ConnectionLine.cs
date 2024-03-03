@@ -4,11 +4,23 @@ namespace Ductworks.Player.Tablet;
 
 public partial class ConnectionLine : Line2D
 {
+	[Signal]
+	public delegate void ConnectionRemovedEventHandler(ConnectionLine connectionRemoved);
+	
+	private readonly float deathCutoffLength = 50f;
+	private readonly float deathSegmentLerpRate = 5f;
+	
 	public bool enabled;
-
+	
 	public Area2D Area2D;
 
 	private Vector2 startPos;
+
+	private bool isDead;
+
+	private Line2D deathAssistant;
+
+	private Vector2 deathA, deathB, deathSeverPointA, deathSeverPointB;
 
 	public override void _Ready()
 	{
@@ -22,6 +34,25 @@ public partial class ConnectionLine : Line2D
 			this.ClearPoints();
 			this.AddPoint(this.startPos);
 			this.AddPoint(this.GetGlobalMousePosition());
+		}
+		else if (this.isDead)
+		{
+			this.ClearPoints();
+			this.AddPoint(this.deathA);
+			this.deathSeverPointA = this.deathSeverPointA.Lerp(this.deathA, (float)delta * this.deathSegmentLerpRate);
+			this.AddPoint(this.deathSeverPointA);
+			bool segmentADone = this.deathSeverPointA.DistanceSquaredTo(this.deathA) <= this.deathCutoffLength;
+			
+			this.deathAssistant.ClearPoints();
+			this.deathAssistant.AddPoint(this.deathB);
+			this.deathSeverPointB = this.deathSeverPointB.Lerp(this.deathB, (float)delta * this.deathSegmentLerpRate);
+			this.deathAssistant.AddPoint(this.deathSeverPointB);
+			bool segmentBDone = this.deathSeverPointB.DistanceSquaredTo(this.deathB) <= this.deathCutoffLength;
+
+			if (segmentADone && segmentBDone)
+			{
+				this.QueueFree();
+			}
 		}
 	}
 
@@ -52,8 +83,30 @@ public partial class ConnectionLine : Line2D
 		this.Area2D = new Area2D();
 		this.Area2D.AddChild(collision);
 		this.AddChild(this.Area2D);
-		this.Area2D.InputPickable = false;
+		this.ToggleCollision(false);
+		
+		this.Area2D.MouseEntered += () =>
+		{
+			this.EmitSignal(SignalName.ConnectionRemoved, this);
+		};
+	}
+
+	public void ToggleCollision(bool isToggled)
+	{
+		this.Area2D.InputPickable = isToggled;
 		// No impact on visuals during an actual build, but makes debugging easier
-		this.Area2D.Visible = false;
+		this.Area2D.Visible = isToggled;
+	}
+
+	public void Kill(Vector2 severPoint)
+	{
+		this.isDead = true;
+		this.deathA = this.Points[0];
+		this.deathB = this.Points[1];
+		this.deathSeverPointA = this.deathSeverPointB = severPoint;
+		this.deathAssistant = new Line2D();
+		this.deathAssistant.Width = this.Width;
+		this.AddChild(this.deathAssistant);
+		this.ToggleCollision(false);
 	}
 }

@@ -50,6 +50,7 @@ public class ConnectionLineManager
 			{
 				this.currentLine.FinishLine(target.Position);
 				this.connections.Add(this.currentLine);
+				this.currentLine.ConnectionRemoved += this.HandleConnectionRemoval;
 				this.currentLine = null;
 				wasConnectionMade = true;
 			}
@@ -70,8 +71,13 @@ public class ConnectionLineManager
 	
 	public bool HandleReleaseOnButton(TabletButton button)
 	{
-		// Handle severing case
 		return this.HandleClickOnButton(button);
+	}
+
+	private void HandleConnectionRemoval(ConnectionLine connectionRemoved)
+	{
+		this.connections.Remove(connectionRemoved);
+		connectionRemoved.Kill(this.Owner.GetGlobalMousePosition());
 	}
 
 	private void ToggleSeveringMode(bool isToggled)
@@ -80,8 +86,7 @@ public class ConnectionLineManager
 		this.SeverLine.Enabled = isToggled;
 		foreach (var connection in this.connections)
 		{
-			connection.Area2D.InputPickable = isToggled;
-			connection.Area2D.Visible = isToggled;
+			connection.ToggleCollision(isToggled);
 		}
 	}
 }

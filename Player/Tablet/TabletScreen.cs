@@ -62,11 +62,9 @@ public partial class TabletScreen : Node2D
 			{
 				if (this.currentlyHoveredTabletButton != null)
 				{
-					GD.Print("trying release");
 					bool wasConnectionMade = this.connectionLineManager.HandleReleaseOnButton(this.currentlyHoveredTabletButton);
 					if (wasConnectionMade)
 					{
-						GD.Print("trying succeeded");
 						this.currentlyHoveredTabletButton.HandleMouseover();
 					}
 				}
