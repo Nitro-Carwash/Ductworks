@@ -21,14 +21,18 @@ public partial class TabletScreen : Node2D
 	[Export]
 	private PackedScene rotateArrowScene;
 
-	[Export]
-	private ConnectionLine connectionLine;
-
 	private readonly List<TabletButton> buttons = new List<TabletButton>();
+	
+	private readonly ConnectionLineManager connectionLineManager = new ConnectionLineManager();
 
 	private bool tabletIsEnabled = false;
 
 	private TabletButton currentlyHoveredTabletButton;
+
+	public override void _Ready()
+	{
+		this.connectionLineManager.Owner = this;
+	}
 
 	public override void _Input(InputEvent @event)
 	{
@@ -37,16 +41,16 @@ public partial class TabletScreen : Node2D
 			var mouseButtonEvent = (InputEventMouseButton)@event;
 			if (mouseButtonEvent.IsActionPressed("tablet_interact", allowEcho: false, exactMatch: false))
 			{
-				if (this.currentlyHoveredTabletButton?.PuzzleElement.CanStartPowerConnection ?? false)
+				if (this.currentlyHoveredTabletButton != null)
 				{
-					this.connectionLine.StartLine(this.currentlyHoveredTabletButton.Position);
+					this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
 				}
 			}
 			else if (mouseButtonEvent.IsActionReleased("tablet_interact", exactMatch: false))
 			{
-				if (this.connectionLine.enabled && (this.currentlyHoveredTabletButton?.PuzzleElement.CanReceivePowerConnection ?? false))
+				if (this.currentlyHoveredTabletButton != null)
 				{
-					this.connectionLine.FinishLine(this.currentlyHoveredTabletButton.Position);
+					this.connectionLineManager.HandleClickOnButton(this.currentlyHoveredTabletButton);
 				}
 			}
 		}
@@ -75,10 +79,6 @@ public partial class TabletScreen : Node2D
 		{
 			return;
 		}
-		if (!shouldBeEnabled)
-		{
-			this.connectionLine.enabled = false;
-		}
 
 		foreach (TabletButton button in this.buttons)
 		{
@@ -90,6 +90,7 @@ public partial class TabletScreen : Node2D
 
 	private void HandlePuzzleButtonMouseEnter(TabletButton instigator)
 	{
+		// Disable picking/input on all buttons but the currently hovered.
 		this.currentlyHoveredTabletButton = instigator;
 		foreach (var button in this.buttons)
 		{

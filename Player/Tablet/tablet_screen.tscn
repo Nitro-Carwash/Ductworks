@@ -10,13 +10,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pookc"]
 size = Vector2(80, 80)
 
-[node name="Tablet Screen" type="Node2D" node_paths=PackedStringArray("connectionLine")]
+[node name="Tablet Screen" type="Node2D"]
 script = ExtResource("1_f0sv1")
 rotateArrowTexture = ExtResource("4_xbar1")
 rotateArrowOffset = Vector2(30, -2)
 rotateArrowScale = Vector2(0.149542, 0.14)
 rotateArrowScene = ExtResource("3_pfdqx")
-connectionLine = NodePath("ConnectionLine")
 
 [node name="TileVisualReference" type="Node2D" parent="."]
 visible = false
