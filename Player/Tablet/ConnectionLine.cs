@@ -4,9 +4,6 @@ namespace Ductworks.Player.Tablet;
 
 public partial class ConnectionLine : Line2D
 {
-	[Signal]
-	public delegate void ConnectionRemovedEventHandler(ConnectionLine connectionRemoved);
-	
 	private readonly float deathCutoffLength = 50f;
 	private readonly float deathSegmentLerpRate = 5f;
 	
@@ -82,13 +79,9 @@ public partial class ConnectionLine : Line2D
 
 		this.Area2D = new Area2D();
 		this.Area2D.AddChild(collision);
+		this.Area2D.CollisionLayer = 2;
 		this.AddChild(this.Area2D);
 		this.ToggleCollision(false);
-		
-		this.Area2D.MouseEntered += () =>
-		{
-			this.EmitSignal(SignalName.ConnectionRemoved, this);
-		};
 	}
 
 	public void ToggleCollision(bool isToggled)

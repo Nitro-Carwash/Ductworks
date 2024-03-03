@@ -66,4 +66,16 @@ public partial class SeverLine : Line2D
 			}
 		}
 	}
+
+	public bool TryGetLastTwoPoints(out Vector2 a, out Vector2 b)
+	{
+		if (this.Points.Length >= 2)
+		{
+			a = this.Points[^1];
+			b = this.Points[^2];
+			return true;
+		}
+		a = b = Vector2.Zero;
+		return false;
+	}
 }

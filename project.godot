@@ -60,6 +60,7 @@ tablet_interact={
 [layer_names]
 
 3d_render/layer_2="HeldItem"
+2d_physics/layer_2="Connection"
 
 [rendering]
 

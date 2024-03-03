@@ -34,7 +34,7 @@ public partial class TabletScreen : Node2D
 
 	public override void _Ready()
 	{
-		this.connectionLineManager.Owner = this;
+		this.AddChild(this.connectionLineManager);
 		this.connectionLineManager.SeverLine = this.SeverLine;
 	}
 
