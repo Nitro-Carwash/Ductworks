@@ -206,3 +206,5 @@ render_target_update_mode = 4
 
 [node name="HeldItemCamera" type="Camera3D" parent="HeldItemViewport/SubViewport"]
 cull_mask = 1047554
+
+[connection signal="player_moved" from="." to="Head/PlayerCamera/Tablet/TabletViewport/Tablet Screen" method="UpdatePlayerPosition"]

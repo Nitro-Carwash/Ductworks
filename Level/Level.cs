@@ -10,6 +10,9 @@ public partial class Level : Node3D
 
 	[Signal]
 	public delegate void PuzzleElementLoadedEventHandler(PuzzleElementBase puzzleElementsBase, int tileCountX, int tileCountZ);
+	
+	[Signal]
+	public delegate void LevelLoadedEventHandler(Vector2 mapSize);
 
 	private int tileCountX;
 	private int tileCountZ;
@@ -18,8 +21,9 @@ public partial class Level : Node3D
 	
 	public override void _Ready()
 	{
-		this.tileCountX = (int)((PlaneMesh)this.Floor.Mesh).Size.X / 4;
-		this.tileCountZ = (int)((PlaneMesh)this.Floor.Mesh).Size.Y / 4;
+		Vector2 floorSize = new Vector2(((PlaneMesh)this.Floor.Mesh).Size.X, ((PlaneMesh)this.Floor.Mesh).Size.Y);
+		this.tileCountX = (int)floorSize.X / 4;
+		this.tileCountZ = (int)floorSize.Y / 4;
 
 		this.puzzleElements = this.GetChildren().OfType<PuzzleElementBase>();
 		Vector2I positionToGridOffset = new Vector2I(2, 2);
@@ -34,6 +38,7 @@ public partial class Level : Node3D
 			
 			this.EmitSignal(SignalName.PuzzleElementLoaded, p, this.tileCountX, this.tileCountZ);
 		}
+		this.EmitSignal(SignalName.LevelLoaded, floorSize);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

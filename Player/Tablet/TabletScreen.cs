@@ -10,20 +10,14 @@ public partial class TabletScreen : Node2D
 	private SubViewport screenViewport;
 
 	[Export]
-	private Texture2D rotateArrowTexture;
-
-	[Export]
-	private Vector2 rotateArrowOffset;
-	
-	[Export]
-	private Vector2 rotateArrowScale;
+	private Sprite2D PlayerSprite;
 
 	[Export]
 	private PackedScene rotateArrowScene;
 
 	[Export]
 	public SeverLine SeverLine;
-
+	
 	private readonly List<TabletButton> buttons = new List<TabletButton>();
 	
 	private readonly ConnectionLineManager connectionLineManager = new ConnectionLineManager();
@@ -31,6 +25,8 @@ public partial class TabletScreen : Node2D
 	private bool tabletIsEnabled = false;
 
 	private TabletButton currentlyHoveredTabletButton;
+
+	private Vector2 floorSize;
 
 	public override void _Ready()
 	{
@@ -117,6 +113,17 @@ public partial class TabletScreen : Node2D
 		{
 			this.connectionLineManager.HandleReleaseOnNothing();
 		}
+	}
+
+	public void OnLevelLoaded(Vector2 floorSize)
+	{
+		this.floorSize = floorSize;
+	}
+
+	public void UpdatePlayerPosition(Vector3 position, Vector3 rotation)
+	{
+		this.PlayerSprite.Position = (new Vector2(position.X, position.Z) + this.floorSize/2) / this.floorSize * this.screenViewport.Size;
+		this.PlayerSprite.Rotation = -rotation.Y;
 	}
 
 	private void HandlePuzzleButtonMouseEnter(TabletButton instigator)

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal player_moved(new_position: Vector3, new_rotation: Vector3)
+
 @export var vertical_angle_limit := 90.0
 @export var mouse_sensitivity := 2.0
 @export var speed := 10
@@ -7,7 +9,7 @@ extends CharacterBody3D
 @export var deceleration := 10
 @export var is_tablet_toggled = false
 
-@onready var head_node = $Head
+@onready var head_node: Node3D = $Head
 @onready var tablet_node = $Head/PlayerCamera/Tablet
 var is_toggle_blocked = false
 
@@ -29,6 +31,8 @@ func _physics_process(delta):
 	velocity = velocity.lerp(target_velocity, target_acceleration * delta)
 	velocity.y = 0
 	move_and_slide()
+	
+	player_moved.emit(self.position, self.head_node.rotation)
 	
 func _input(event):
 	if event is InputEventMouseMotion:
