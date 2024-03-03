@@ -11,8 +11,10 @@ public partial class TabletButton : Area2D
 	[Signal]
 	public delegate void MouseExitedTabletButtonEventHandler(TabletButton tabletButton);
 	
+	public PuzzleElementBase PuzzleElement { get; private set; }
+	
 	private RotationButton rotateRight, rotateLeft;
-
+	
 	private bool isHovered;
 	
 	public override void _Ready()
@@ -23,6 +25,8 @@ public partial class TabletButton : Area2D
 
 	public void Initialize(PuzzleElementBase puzzleElement, Vector2 tabletTileDimensions, PackedScene rotateArrowScene)
 	{
+		this.PuzzleElement = puzzleElement;
+		
 		var spriteScale = tabletTileDimensions / 80;
         
 		var sprite = puzzleElement.OrientationSprites[puzzleElement.GetOrientation()];

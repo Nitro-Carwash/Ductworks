@@ -10,6 +10,9 @@ public abstract partial class PuzzleElementBase : Node3D
 	[Export]
 	public Vector2 GridPosition = new Vector2(-1, -1);
 
+	[Export]
+	public bool CanStartPowerConnection = false;
+
 	public virtual int GetOrientation()
 	{
 		return 0;

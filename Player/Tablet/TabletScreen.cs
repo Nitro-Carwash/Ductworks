@@ -21,11 +21,25 @@ public partial class TabletScreen : Node2D
 	[Export]
 	private PackedScene rotateArrowScene;
 
+	[Export]
+	private ConnectionLine connectionLine;
+
 	private readonly List<TabletButton> buttons = new List<TabletButton>();
 
 	private bool tabletIsEnabled = false;
 
-	private bool lastHoveredTabletButton;
+	private TabletButton currentlyHoveredTabletButton;
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventMouseButton)
+		{
+			if (this.currentlyHoveredTabletButton?.PuzzleElement.CanStartPowerConnection ?? false)
+			{
+				this.connectionLine.StartLine(((InputEventMouseButton)@event).GlobalPosition);
+			}
+		}
+	}
 
 	public void AddPuzzleElementToScreen(PuzzleElementBase puzzleElement, int tileCountX, int tileCountZ)
 	{
@@ -50,7 +64,11 @@ public partial class TabletScreen : Node2D
 		{
 			return;
 		}
-		
+		if (!shouldBeEnabled)
+		{
+			this.connectionLine.enabled = shouldBeEnabled;
+		}
+
 		foreach (TabletButton button in this.buttons)
 		{
 			button.ToggleEnabled(shouldBeEnabled);
@@ -61,7 +79,7 @@ public partial class TabletScreen : Node2D
 
 	private void HandlePuzzleButtonMouseEnter(TabletButton instigator)
 	{
-		GD.Print(instigator.Name);
+		this.currentlyHoveredTabletButton = instigator;
 		foreach (var button in this.buttons)
 		{
 			if (button == instigator)
@@ -74,7 +92,7 @@ public partial class TabletScreen : Node2D
 	
 	private void HandlePuzzleButtonMouseExit(TabletButton instigator)
 	{
-		GD.Print("Screen exit");
+		this.currentlyHoveredTabletButton = null;
 		foreach (var button in this.buttons)
 		{
 			button.InputPickable = true;

@@ -1,20 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg45dtax8bfjw"]
+[gd_scene load_steps=8 format=3 uid="uid://cg45dtax8bfjw"]
 
 [ext_resource type="Script" path="res://Player/Tablet/TabletScreen.cs" id="1_f0sv1"]
 [ext_resource type="Texture2D" uid="uid://b6jg310m4qk2" path="res://PuzzleElement/pipe_long_ew.png" id="2_gsior"]
 [ext_resource type="Texture2D" uid="uid://fpbcctoh7lij" path="res://PuzzleElement/pipe_long_ns.png" id="3_a4s55"]
 [ext_resource type="PackedScene" uid="uid://bdubbvpf3b6g2" path="res://Player/Tablet/rotate_button_template.tscn" id="3_pfdqx"]
 [ext_resource type="Texture2D" uid="uid://dci3i8iwfqvi0" path="res://Player/Tablet/rotate_arrow.svg" id="4_xbar1"]
+[ext_resource type="Script" path="res://Player/Tablet/ConnectionLine.cs" id="6_k0c67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pookc"]
 size = Vector2(80, 80)
 
-[node name="Tablet Screen" type="Node2D"]
+[node name="Tablet Screen" type="Node2D" node_paths=PackedStringArray("connectionLine")]
 script = ExtResource("1_f0sv1")
 rotateArrowTexture = ExtResource("4_xbar1")
 rotateArrowOffset = Vector2(30, -2)
 rotateArrowScale = Vector2(0.149542, 0.14)
 rotateArrowScene = ExtResource("3_pfdqx")
+connectionLine = NodePath("ConnectionLine")
 
 [node name="TileVisualReference" type="Node2D" parent="."]
 visible = false
@@ -42,3 +44,6 @@ texture = ExtResource("4_xbar1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileVisualReference"]
 position = Vector2(400, 183)
 shape = SubResource("RectangleShape2D_pookc")
+
+[node name="ConnectionLine" type="Line2D" parent="."]
+script = ExtResource("6_k0c67")

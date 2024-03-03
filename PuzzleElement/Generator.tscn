@@ -23,6 +23,7 @@ albedo_color = Color(0, 0, 0, 1)
 script = ExtResource("1_au15u")
 connectPoint = NodePath("Antenna/Marker3D")
 OrientationSprites = Array[Texture2D]([ExtResource("2_r7nys")])
+CanStartPowerConnection = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
