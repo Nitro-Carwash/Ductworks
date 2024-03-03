@@ -109,5 +109,7 @@ public partial class ConnectionLine : Line2D
 		this.deathAssistant.Width = this.Width;
 		this.AddChild(this.deathAssistant);
 		this.ToggleCollision(false);
+		this.Area2D.CollisionLayer = 0;
+		this.puzzleElementA.EndConnection(this.PuzzleElementB);
 	}
 }

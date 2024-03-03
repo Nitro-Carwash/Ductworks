@@ -37,4 +37,6 @@ public abstract partial class PuzzleElementBase : Node3D
 	}
 	
 	public virtual void EstablishConnection(PuzzleElementBase other) {}
+	
+	public virtual void EndConnection(PuzzleElementBase other) { }
 }

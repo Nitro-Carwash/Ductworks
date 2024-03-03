@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://8rwi3ue7la45"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_du44u"]
+resource_local_to_scene = true
 top_radius = 0.02
 bottom_radius = 0.02
 

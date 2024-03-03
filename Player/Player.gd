@@ -45,7 +45,7 @@ func _input(event):
 		if !is_toggle_blocked:
 			is_tablet_toggled = !is_tablet_toggled
 			if is_tablet_toggled:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			else:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			tablet_node.set_input_enabled(is_tablet_toggled)

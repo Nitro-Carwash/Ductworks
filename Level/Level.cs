@@ -39,6 +39,7 @@ public partial class Level : Node3D
 			newPosition += gridOffset;
 			p.GridPosition = newPosition;
 			p.OnConnectionEstablished += this.connectionManager.AttachConnection;
+			p.OnConnectionRemoved += this.connectionManager.RemoveConnection;
 			
 			this.EmitSignal(SignalName.PuzzleElementLoaded, p, this.tileCountX, this.tileCountZ);
 		}

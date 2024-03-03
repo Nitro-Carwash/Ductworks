@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 using Ductworks.PuzzleElement;
 
 public partial class ConnectionManager : Node
@@ -21,6 +22,10 @@ public partial class ConnectionManager : Node
 	
 	public void RemoveConnection(PuzzleElementBase from, PuzzleElementBase to)
 	{
+		foreach (var connectionToRemove in this.connections.Where(c => c.from == from && c.to == to))
+		{
+			connectionToRemove.node.QueueFree();
+		}
 		this.connections.RemoveAll(c => c.from == from && c.to == to);
 	}
 }

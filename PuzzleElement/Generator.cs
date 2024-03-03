@@ -21,4 +21,9 @@ public partial class Generator : PuzzleElementBase
 	{
 		this.EmitSignal(SignalName.OnConnectionEstablished, this, other);
 	}
+	
+	public override void EndConnection(PuzzleElementBase other)
+	{
+		this.EmitSignal(SignalName.OnConnectionRemoved, this, other);
+	}
 }
