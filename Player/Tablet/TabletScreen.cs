@@ -32,6 +32,7 @@ public partial class TabletScreen : Node2D
 	{
 		this.AddChild(this.connectionLineManager);
 		this.connectionLineManager.SeverLine = this.SeverLine;
+		this.connectionLineManager.Owner = this;
 	}
 
 	public override void _Input(InputEvent @event)

@@ -68,7 +68,7 @@ public partial class ConnectionLineManager : Node2D
 			}
 			if (!this.currentLine.enabled)
 			{
-				this.currentLine.StartLine(target.Position);
+				this.currentLine.StartLine(target.Position, target.PuzzleElement);
 			}
 			this.ToggleSeveringMode(false);
 		}
@@ -76,7 +76,7 @@ public partial class ConnectionLineManager : Node2D
 		{
 			if (this.currentLine != null && this.currentLine.enabled)
 			{
-				this.currentLine.FinishLine(target.Position);
+				this.currentLine.FinishLine(target.Position, target.PuzzleElement);
 				this.connections.Add(this.currentLine);
 				this.currentLine = null;
 				wasConnectionMade = true;

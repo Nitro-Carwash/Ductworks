@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using Ductworks.PuzzleElement;
+using Godot;
 
 namespace Ductworks.Player.Tablet;
 
@@ -10,6 +11,8 @@ public partial class ConnectionLine : Line2D
 	public bool enabled;
 	
 	public Area2D Area2D;
+
+	public PuzzleElementBase puzzleElementA, PuzzleElementB;
 
 	private Vector2 startPos;
 
@@ -53,14 +56,17 @@ public partial class ConnectionLine : Line2D
 		}
 	}
 
-	public void StartLine(Vector2 pos)
+	public void StartLine(Vector2 pos, PuzzleElementBase startPuzzleElement)
 	{
 		this.startPos = pos;
+		this.puzzleElementA = startPuzzleElement;
 		this.enabled = true;
 	}
 
-	public void FinishLine(Vector2 pos)
+	public void FinishLine(Vector2 pos, PuzzleElementBase endPuzzleElement)
 	{
+		this.PuzzleElementB = endPuzzleElement;
+		
 		this.ClearPoints();
 		this.AddPoint(this.startPos);
 		this.AddPoint(pos);
@@ -82,6 +88,8 @@ public partial class ConnectionLine : Line2D
 		this.Area2D.CollisionLayer = 2;
 		this.AddChild(this.Area2D);
 		this.ToggleCollision(false);
+		
+		this.puzzleElementA.EstablishConnection(this.PuzzleElementB);
 	}
 
 	public void ToggleCollision(bool isToggled)

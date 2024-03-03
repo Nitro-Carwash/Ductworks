@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://8rwi3ue7la45"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_du44u"]
+top_radius = 0.02
+bottom_radius = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56xw3"]
+transparency = 1
+albedo_color = Color(0, 0.909804, 0.913725, 0.419608)
+emission_enabled = true
+emission = Color(0, 0.909804, 0.913725, 1)
+emission_energy_multiplier = 10.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Laser Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_du44u")
+surface_material_override/0 = SubResource("StandardMaterial3D_56xw3")

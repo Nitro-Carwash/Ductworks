@@ -5,14 +5,17 @@ using Ductworks.PuzzleElement;
 
 public partial class Level : Node3D
 {
-	[Export]
-	private MeshInstance3D Floor;
-
 	[Signal]
 	public delegate void PuzzleElementLoadedEventHandler(PuzzleElementBase puzzleElementsBase, int tileCountX, int tileCountZ);
 	
 	[Signal]
 	public delegate void LevelLoadedEventHandler(Vector2 mapSize);
+	
+	[Export]
+	private MeshInstance3D Floor;
+
+	[Export]
+	private ConnectionManager connectionManager;
 
 	private int tileCountX;
 	private int tileCountZ;
@@ -35,6 +38,7 @@ public partial class Level : Node3D
 			newPosition /= 4;
 			newPosition += gridOffset;
 			p.GridPosition = newPosition;
+			p.OnConnectionEstablished += this.connectionManager.AttachConnection;
 			
 			this.EmitSignal(SignalName.PuzzleElementLoaded, p, this.tileCountX, this.tileCountZ);
 		}

@@ -16,28 +16,9 @@ public partial class Generator : PuzzleElementBase
 	}
 
 	private List<PuzzleElementBase> connections = new List<PuzzleElementBase>();
-	
-	public void ConnectTo(PuzzleElementBase target)
+
+	public override void EstablishConnection(PuzzleElementBase other)
 	{
-		GD.Print(target.GetConnectionPoint().ToString());
-		GD.Print(this.GetConnectionPoint().ToString());
-		
-		OrmMaterial3D material = new OrmMaterial3D();
-		material.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
-		material.AlbedoColor = Colors.Aquamarine;
-		
-		var immediateMesh = new ImmediateMesh();
-		immediateMesh.SurfaceBegin(Mesh.PrimitiveType.Lines, material);
-		immediateMesh.SurfaceAddVertex(this.GetConnectionPoint());
-		immediateMesh.SurfaceAddVertex(target.GetConnectionPoint());
-		immediateMesh.SurfaceEnd();
-
-		var meshInstance = new MeshInstance3D();
-		meshInstance.Mesh = immediateMesh;
-		meshInstance.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
-
-		var oldTransform = meshInstance.GlobalPosition;
-		this.AddChild(meshInstance);
-		meshInstance.GlobalPosition = oldTransform;
+		this.EmitSignal(SignalName.OnConnectionEstablished, this, other);
 	}
 }
